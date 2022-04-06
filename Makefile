@@ -6,7 +6,7 @@
 #    By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/05 14:43:45 by afuchs            #+#    #+#              #
-#    Updated: 2022/04/06 12:21:37 by afuchs           ###   ########.fr        #
+#    Updated: 2022/04/06 14:17:01 by afuchs           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 SRCS	=	main.c					\
@@ -77,20 +77,20 @@ OBJ		= $(SRCS:%.c=$(OPATH)%.o)
 
 OPT		= -Wall -Werror -Wextra
 
-MLX		= -l mlx
+MLX		= -lmlx
 
-MATH	= -l m
+MATH	= -lm
 
 NAME	= so_long
 
 all				:	$(NAME)
 
 $(NAME)			:	$(OPATH) $(OBJ)
-					@gcc $(OPT) $(OBJ) $(MLX) $(MATH) -o $(NAME)
+					@gcc $(OPT) $(MLX) $(MATH) $(OBJ) -o $(NAME)
 					@echo "\033[32mCompilation complete.\033[0m"
 
 $(OPATH)%.o		:	%.c
-					@gcc -c $(OPT) $< -o $@
+					@gcc -c $(OPT)  $< -o $@
 					@echo "\033[90m$@ objects file created.\033[0m"
 
 $(OPATH)%.o		:	$(LPATH)%.c
