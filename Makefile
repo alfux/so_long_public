@@ -6,10 +6,12 @@
 #    By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/05 14:43:45 by afuchs            #+#    #+#              #
-#    Updated: 2022/04/06 14:17:01 by afuchs           ###   ########.fr        #
+#    Updated: 2022/04/06 14:53:39 by afuchs           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 SRCS	=	main.c					\
+			events.c				\
+			window.c				\
 			ft_atoi.c				\
 			ft_memcpy.c				\
 			ft_split.c				\
