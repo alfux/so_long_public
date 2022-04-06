@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/06 17:38:12 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/06 18:43:55 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -21,21 +21,26 @@
 # include "libft/libft.h"
 # include <mlx.h>
 
-struct					s_dat
+struct					s_img
 {
-	void	*cid;
-	void	*wid;
 	void	*iid;
 	char	*fpx;
 	int		bpp;
 	int		sil;
 	int		end;
-	int		col;
+};
+typedef struct s_img	t_img;
+
+struct					s_dat
+{
+	void	*cid;
+	void	*wid;
+	t_img	*img;
 };
 typedef struct s_dat	t_dat;
 
 t_dat	*open_win(int x, int y, char *title);
-void	close_and_exit(t_dat *scr);
-void	k_event(int keycode, t_dat *scr);
-
+void	close_and_exit(t_dat *win);
+void	k_event(int keycode, t_dat *win);
+//int	mlx_hook(t_win_list *win, int x_event, int x_mask, int (*f)(), void *p);
 #endif
