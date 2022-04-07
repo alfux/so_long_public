@@ -6,7 +6,7 @@
 #    By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/05 14:43:45 by afuchs            #+#    #+#              #
-#    Updated: 2022/04/06 14:53:39 by afuchs           ###   ########.fr        #
+#    Updated: 2022/04/07 17:34:56 by afuchs           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 SRCS	=	main.c					\
@@ -92,7 +92,7 @@ $(NAME)			:	$(OPATH) $(OBJ)
 					@echo "\033[32mCompilation complete.\033[0m"
 
 $(OPATH)%.o		:	%.c
-					@gcc -c $(OPT)  $< -o $@
+					@gcc -c $(OPT) $< -o $@
 					@echo "\033[90m$@ objects file created.\033[0m"
 
 $(OPATH)%.o		:	$(LPATH)%.c

@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/06 18:43:55 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/07 17:55:14 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -35,6 +35,9 @@ struct					s_dat
 {
 	void	*cid;
 	void	*wid;
+	int		w;
+	int		h;
+	char	*title;
 	t_img	*img;
 };
 typedef struct s_dat	t_dat;
