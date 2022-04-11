@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:57:42 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/06 19:58:24 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/11 11:37:04 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -19,7 +19,7 @@ int	main(void)
 	int		height;
 
 	win = open_win(598, 650, "so_long");
-	img.iid = mlx_xpm_file_to_image(win->cid, "test.xpm", &width, &height);
+	img.iid = mlx_xpm_file_to_image(win->cid, "graphics/Fidle1.xpm", &width, &height);
 	if (!img.iid)
 		return (1);
 	win->img = &img;
