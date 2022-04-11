@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:57:42 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/11 11:37:04 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/11 17:08:38 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -14,20 +14,14 @@
 int	main(void)
 {
 	t_dat	*win;
-	t_img	img;
-	int		width;
-	int		height;
 
 	win = open_win(598, 650, "so_long");
-	img.iid = mlx_xpm_file_to_image(win->cid, "graphics/Fidle1.xpm", &width, &height);
-	if (!img.iid)
-		return (1);
-	win->img = &img;
-	img.fpx = mlx_get_data_addr(img.iid, &img.bpp, &img.sil, &img.end);
-	*(int *)(img.fpx + 12 * (img.bpp / 8) + 10 * img.sil) = 0x000000ff;
-	mlx_put_image_to_window(win->cid, win->wid, win->img->iid, 50, 50);
+	load_player(win, 20, 20);
+	MPITW(win->cid, win->wid, win->hum.spr[0].iid, win->hum.pos.x,
+		win->hum.pos.y);
 	mlx_hook(win->wid, AF_KEYDOWN, 0, (int (*)())(&k_event), win);
 	mlx_hook(win->wid, AF_DESTROY, 0, (int (*)())(&close_and_exit), win);
+	mlx_loop_hook(win->cid, (int (*)())(&animate), win);
 	mlx_loop(win->cid);
 	return (0);
 }
