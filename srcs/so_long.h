@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/15 20:39:38 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/15 23:07:07 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -18,16 +18,12 @@
 # define AF_MOUSEMOVE 6
 # define AF_EXPOSE 12
 # define AF_DESTROY 17
-# define MPITW mlx_put_image_to_window
-# define MXFTI mlx_xpm_file_to_image
-# define MGDA mlx_get_data_addr
-# define MCW mlx_clear_window
 # define MOVE_UP 0x7e
 # define MOVE_DOWN 0x7d
 # define MOVE_LEFT 0x7b
 # define MOVE_RIGHT 0x7c
 # define ESCAPE 0x35
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <mlx.h>
 
 typedef struct s_bool	t_bool;
@@ -77,5 +73,8 @@ void	free_player(t_dat *win);
 void	animate(t_dat *win);
 t_coo	set_coo(int x, int y);
 void	move_player(t_dat *win, int reset);
+int		mpitw(t_dat *win, void *img_ptr, int x, int y);
+void	*mxfti(void *mlx_ptr, char *filename, int *width, int *height);
+char	*mgda(void *img_ptr, int *bits_per_pixel, int *size_line, int *endian);
 //int	mlx_hook(t_win_list *win, int x_event, int x_mask, int (*f)(), void *p);
 #endif

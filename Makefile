@@ -6,7 +6,7 @@
 #    By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/05 14:43:45 by afuchs            #+#    #+#              #
-#    Updated: 2022/04/15 20:23:26 by afuchs           ###   ########.fr        #
+#    Updated: 2022/04/15 23:05:05 by afuchs           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 SRCS	=	main.c					\
@@ -14,6 +14,7 @@ SRCS	=	main.c					\
 			animate.c				\
 			kb_events.c				\
 			window.c				\
+			too_long.c				\
 			ft_atoi.c				\
 			ft_memcpy.c				\
 			ft_split.c				\
@@ -77,6 +78,8 @@ OPATH	= obj/
 
 LPATH	= libft/
 
+SPATH	= srcs/
+
 OBJ		= $(SRCS:%.c=$(OPATH)%.o)
 
 OPT		= -Wall -Werror -Wextra
@@ -93,7 +96,7 @@ $(NAME)			:	$(OPATH) $(OBJ)
 					@gcc $(OPT) $(MLX) $(MATH) $(OBJ) -o $(NAME)
 					@echo "\033[32mCompilation complete.\033[0m"
 
-$(OPATH)%.o		:	%.c
+$(OPATH)%.o		:	$(SPATH)%.c
 					@gcc -c $(OPT) $< -o $@
 					@echo "\033[90m$@ objects file created.\033[0m"
 
