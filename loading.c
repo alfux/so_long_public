@@ -6,10 +6,11 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:05:34 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/11 17:22:11 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/15 20:26:59 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
+
 static void	get_sprites(t_dat *win)
 {
 	t_img	*pl;
@@ -36,16 +37,19 @@ static void	get_sprites(t_dat *win)
 void	load_player(t_dat *win, int x, int y)
 {
 	int		i;
-	
+
 	get_sprites(win);
 	i = -1;
 	while (++i < 16)
 	{
 		win->hum.spr[i].fpx = MGDA(win->hum.spr[i].iid, &win->hum.spr[i].bpp,
-			&win->hum.spr[i].sil, &win->hum.spr[i].end);
+				&win->hum.spr[i].sil, &win->hum.spr[i].end);
 	}
 	win->hum.pos = set_coo(x, y);
-	win->hum.tgt = win->hum.pos;
+	i = 0;
+	while (i < 4)
+		win->hum.k[i++] = 0;
+	win->hum.i = -1;
 }
 
 void	free_player(t_dat *win)

@@ -6,13 +6,13 @@
 #    By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/05 14:43:45 by afuchs            #+#    #+#              #
-#    Updated: 2022/04/11 13:29:47 by afuchs           ###   ########.fr        #
+#    Updated: 2022/04/15 20:23:26 by afuchs           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 SRCS	=	main.c					\
 			loading.c				\
 			animate.c				\
-			events.c				\
+			kb_events.c				\
 			window.c				\
 			ft_atoi.c				\
 			ft_memcpy.c				\
