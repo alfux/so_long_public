@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:57:42 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/15 22:58:17 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/16 18:34:55 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -22,6 +22,7 @@ int	main(void)
 	mlx_hook(win->wid, AF_KEYDOWN, 0, (int (*)())(&kd_event), win);
 	mlx_hook(win->wid, AF_KEYUP, 0, (int (*)())(&ku_event), win);
 	mlx_hook(win->wid, AF_DESTROY, 0, (int (*)())(&close_and_exit), win);
+	mlx_do_key_autorepeatoff(win->cid);
 	mlx_loop(win->cid);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:05:34 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/15 22:56:03 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/16 17:31:54 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -48,7 +48,7 @@ void	load_player(t_dat *win, int x, int y)
 	win->hum.pos = set_coo(x, y);
 	i = 0;
 	while (i < 4)
-		win->hum.k[i++] = 0;
+		win->hum.k[i++] = -1;
 	win->hum.i = -1;
 }
 
