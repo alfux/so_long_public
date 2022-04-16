@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/16 18:26:43 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/16 23:07:37 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -24,6 +24,7 @@
 # define MOVE_RIGHT 0x2
 # define ESCAPE 0x35
 # include "../libft/libft.h"
+# include <fcntl.h>
 # include <mlx.h>
 
 typedef struct s_bool	t_bool;
@@ -60,6 +61,7 @@ struct					s_dat
 	int		h;
 	char	*tit;
 	t_guy	hum;
+	char	**map;
 };
 typedef struct s_dat	t_dat;
 
@@ -75,6 +77,6 @@ void	move_player(t_dat *win, int reset);
 int		mpitw(t_dat *win, void *img_ptr, int x, int y);
 void	*mxfti(void *mlx_ptr, char *filename, int *width, int *height);
 char	*mgda(void *img_ptr, int *bits_per_pixel, int *size_line, int *endian);
-int		check_map(char *mapname);
+int		get_map(char *mapname, char ***map);
 //int	mlx_hook(t_win_list *win, int x_event, int x_mask, int (*f)(), void *p);
 #endif

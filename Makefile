@@ -6,7 +6,7 @@
 #    By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/05 14:43:45 by afuchs            #+#    #+#              #
-#    Updated: 2022/04/16 18:27:09 by afuchs           ###   ########.fr        #
+#    Updated: 2022/04/16 23:04:36 by afuchs           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 SRCS	=	main.c					\
@@ -14,8 +14,8 @@ SRCS	=	main.c					\
 			animate.c				\
 			kb_events.c				\
 			window.c				\
-			too_long.c				\
 			map.c					\
+			too_long.c				\
 			ft_atoi.c				\
 			ft_memcpy.c				\
 			ft_split.c				\

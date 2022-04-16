@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 18:01:19 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/16 19:56:01 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/16 23:40:58 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -32,12 +32,12 @@ static int	check_name(char *mapname)
 	return (0);
 }
 
-static int	check_line(char *line, int *cep)
+static int	check_line(char *line, int *cep, size_t *size)
 {
 	size_t	i;
 	int		only_ones;
 
-	if (*line != '1')
+	if (!line || *line != '1')
 		return (0);
 	i = 1;
 	only_ones = 2;
@@ -57,33 +57,56 @@ static int	check_line(char *line, int *cep)
 	}
 	if (*(line + i - 1) != '1')
 		return (0);
+	*size = i;
 	return (only_ones);
 }
-
-static int	check_map(int fd)
+/*NORMINETTE/!\*/
+static char	**check_map(int fd, int *cep, size_t *size, int row)
 {
-	char	*prev;
-	char	*curr;
-	int		cep[3];
-	size_t	i;
+	char	**map;
+	char	*line;
+	int		only_ones;
 
-	i = 0;
-	while (i < 3)
-		cep[i++] = 0;
-	i = 0;
-	curr = get_next_line(fd);
+	line = get_next_line(fd);
+	if (line)
+	{
+		only_ones = check_line(line, cep, size + 1);
+		if (!only_ones)
+			return (return_and_free((void *)0, line));
+		if (!*size)
+			*size = *(size + 1);
+		else if (*size != *(size + 1))
+			return (return_and_free((void *)0, line));
+		map = check_map(fd, cep, size, row + 1);
+		if (!map)
+			return (return_and_free((void *)0, line));
+		if ((!*(map + row + 1) || !row) && only_ones != 2)
+			return (return_and_free(return_and_free((void *)0, line), map));
+		*(map + row) = line;
+		return (map);
+	}
+	if (!*cep || !*(cep + 1) || !*(cep + 2))
+		return ((void *)0);
+	map = ft_calloc(row + 1, sizeof (char *));
+	*(map + row) = line;
+	return (map);
 }
 
-int	err_map(char *mapname)
+int	get_map(char *mapname, char ***map)
 {
-	int	fd;
+	int		fd;
+	int		cep[3];
+	size_t	size[2];
 
 	if (!check_name(mapname))
 		return (1);
 	fd = open(mapname, O_RDONLY);
 	if (fd == -1)
 		return (2);
-	if (!check_map(fd))
+	ft_bzero(cep, 3 * sizeof (int));
+	ft_bzero(size, 2 * sizeof (size_t));
+	*map = check_map(fd, cep, size, 0);
+	if (!*map)
 		return (3);
 	if (close(fd) == -1)
 		return (4);
