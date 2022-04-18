@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 18:01:19 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/16 23:40:58 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/19 00:55:05 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -25,9 +25,9 @@ static int	check_name(char *mapname)
 	i = ft_strlen(mapname);
 	if (i >= 5)
 		if (*(mapname + i - 1) == 'r')
-			if(*(mapname + i - 2) == 'e')
-				if(*(mapname + i - 3) == 'b')
-					if(*(mapname + i - 4) == '.')
+			if (*(mapname + i - 2) == 'e')
+				if (*(mapname + i - 3) == 'b')
+					if (*(mapname + i - 4) == '.')
 						return (1);
 	return (0);
 }
@@ -60,7 +60,7 @@ static int	check_line(char *line, int *cep, size_t *size)
 	*size = i;
 	return (only_ones);
 }
-/*NORMINETTE/!\*/
+
 static char	**check_map(int fd, int *cep, size_t *size, int row)
 {
 	char	**map;
@@ -71,11 +71,9 @@ static char	**check_map(int fd, int *cep, size_t *size, int row)
 	if (line)
 	{
 		only_ones = check_line(line, cep, size + 1);
-		if (!only_ones)
-			return (return_and_free((void *)0, line));
-		if (!*size)
+		if (!row)
 			*size = *(size + 1);
-		else if (*size != *(size + 1))
+		if (!only_ones || *size != *(size + 1))
 			return (return_and_free((void *)0, line));
 		map = check_map(fd, cep, size, row + 1);
 		if (!map)

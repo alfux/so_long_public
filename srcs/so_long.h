@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/16 23:07:37 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/19 00:57:28 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -27,7 +27,6 @@
 # include <fcntl.h>
 # include <mlx.h>
 
-typedef struct s_bool	t_bool;
 struct					s_coo
 {
 	int	x;

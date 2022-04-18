@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 20:25:35 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/16 17:43:25 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/19 01:11:08 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -39,7 +39,6 @@ void	animate(t_dat *win)
 		move_player(win, 0);
 	else
 		move_player(win, 1);
-//	ft_printf("k[0] = %i | k[1] = %i | k[2] = %i | k[3] = %i\n", win->hum.k[0], win->hum.k[1], win->hum.k[2], win->hum.k[3]);
 	mlx_sync(2, win->wid);
 }
 
