@@ -6,10 +6,33 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:05:34 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/16 17:31:54 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/20 16:29:35 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
+
+static void	get_mapix(t_dat *win)
+{
+	t_img	*pl;
+
+	pl = win->map.pix;
+	pl[0].iid = mxfti(win->cid, "pix/WallD.xpm", &pl[0].w, &pl[0].h);
+	pl[1].iid = mxfti(win->cid, "pix/WallR.xpm", &pl[1].w, &pl[1].h);
+	pl[2].iid = mxfti(win->cid, "pix/WallU.xpm", &pl[2].w, &pl[2].h);
+	pl[3].iid = mxfti(win->cid, "pix/WallL.xpm", &pl[3].w, &pl[3].h);
+	pl[4].iid = mxfti(win->cid, "pix/WallDL.xpm", &pl[4].w, &pl[4].h);
+	pl[5].iid = mxfti(win->cid, "pix/WallDR.xpm", &pl[5].w, &pl[5].h);
+	pl[6].iid = mxfti(win->cid, "pix/WallUR.xpm", &pl[6].w, &pl[6].h);
+	pl[7].iid = mxfti(win->cid, "pix/WallUL.xpm", &pl[7].w, &pl[7].h);
+	pl[8].iid = mxfti(win->cid, "pix/WallLUR.xpm", &pl[8].w, &pl[8].h);
+	pl[9].iid = mxfti(win->cid, "pix/WallDLU.xpm", &pl[9].w, &pl[9].h);
+	pl[10].iid = mxfti(win->cid, "pix/WallLDR.xpm", &pl[10].w, &pl[10].h);
+	pl[11].iid = mxfti(win->cid, "pix/WallULD.xpm", &pl[11].w, &pl[11].h);
+	pl[12].iid = mxfti(win->cid, "pix/Pillar.xpm", &pl[12].w, &pl[12].h);
+	pl[13].iid = mxfti(win->cid, "pix/Floor.xpm", &pl[13].w, &pl[13].h);
+	pl[14].iid = mxfti(win->cid, "pix/BloodyFloor.xpm", &pl[14].w, &pl[14].h);
+	pl[15].iid = mxfti(win->cid, "pix/WallC.xpm", &pl[15].w, &pl[15].h);
+}
 
 static void	get_sprites(t_dat *win)
 {
@@ -59,4 +82,14 @@ void	free_player(t_dat *win)
 	i = 0;
 	while (i < 16)
 		mlx_destroy_image(win->cid, win->hum.spr[i++].iid);
+}
+
+void	free_map(t_dat *win)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < win->map.h)
+		free(*(win->map.imap + i++));
+	free(win->map.imap);
 }

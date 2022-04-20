@@ -6,7 +6,7 @@
 #    By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/05 14:43:45 by afuchs            #+#    #+#              #
-#    Updated: 2022/04/16 23:04:36 by afuchs           ###   ########.fr        #
+#    Updated: 2022/04/20 16:41:09 by afuchs           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 SRCS	=	main.c					\
@@ -15,6 +15,7 @@ SRCS	=	main.c					\
 			kb_events.c				\
 			window.c				\
 			map.c					\
+			drawmap.c				\
 			too_long.c				\
 			ft_atoi.c				\
 			ft_memcpy.c				\
@@ -89,7 +90,7 @@ OBJ		= $(SRCS:%.c=$(OPATH)%.o)
 
 OPT		= -Wall -Werror -Wextra -g
 
-MLX		= -lmlx
+MLX		= -lbsd -lmlx -lXext -lX11
 
 MATH	= -lm
 
@@ -98,15 +99,15 @@ NAME	= so_long
 all				:	$(NAME)
 
 $(NAME)			:	$(OPATH) $(OBJ)
-					@gcc $(OPT) $(MLX) $(MATH) $(OBJ) -o $(NAME)
+					@gcc $(OPT) $(MATH) $(OBJ) $(MLX) -o $(NAME)
 					@echo "\033[32mCompilation complete.\033[0m"
 
 $(OPATH)%.o		:	$(SPATH)%.c $(SPATH)$(SHEADER)
-					@gcc -c $(OPT) $< -o $@
+					@gcc -c $(OPT) $< $(MLX) -o $@
 					@echo "\033[90m$@ objects file created.\033[0m"
 
 $(OPATH)%.o		:	$(LPATH)%.c $(LPATH)$(LHEADER)
-					@gcc -c $(OPT) $< -o $@
+					@gcc -c $(OPT) $< $(MLX) -o $@
 					@echo "\033[90m$@ object file created.\033[0m"
 
 $(OPATH)		:	

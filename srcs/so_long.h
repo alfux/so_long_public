@@ -6,26 +6,25 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/19 00:57:28 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/20 15:09:03 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# define AF_KEYDOWN 2
-# define AF_KEYUP 3
-# define AF_MOUSEDOWN 4
-# define AF_MOUSEUP 5
-# define AF_MOUSEMOVE 6
-# define AF_EXPOSE 12
-# define AF_DESTROY 17
-# define MOVE_UP 0xd
-# define MOVE_DOWN 0x1
-# define MOVE_LEFT 0x0
-# define MOVE_RIGHT 0x2
-# define ESCAPE 0x35
+# define MOVE_UP 0x7a
+# define MOVE_DOWN 0x73
+# define MOVE_LEFT 0x71
+# define MOVE_RIGHT 0x64
+# define ESCAPE 0xff1b
+# define RED "\033[31m"
+# define WHITE "\033[0m"
+# define GREEN "\033[32m"
+# define YELLOW "\033[33m"
 # include "../libft/libft.h"
 # include <fcntl.h>
 # include <mlx.h>
+# include <X11/X.h>
+# include <time.h>
 
 struct					s_coo
 {
@@ -52,6 +51,14 @@ struct					s_guy
 	int		i;
 };
 typedef struct s_guy	t_guy;
+struct					s_map
+{
+	t_img	pix[16];
+	char	**imap;
+	size_t	h;
+	size_t	w;
+};
+typedef struct s_map	t_map;
 struct					s_dat
 {
 	void	*cid;
@@ -60,17 +67,17 @@ struct					s_dat
 	int		h;
 	char	*tit;
 	t_guy	hum;
-	char	**map;
+	t_map	map;
 };
 typedef struct s_dat	t_dat;
 
 t_dat	*open_win(int x, int y, char *title);
-void	close_and_exit(t_dat *win);
-void	kd_event(int keycode, t_dat *win);
-void	ku_event(int keycode, t_dat *win);
+int		close_and_exit(t_dat *win);
+int		kd_event(int keycode, t_dat *win);
+int		ku_event(int keycode, t_dat *win);
 void	load_player(t_dat *win, int x, int y);
 void	free_player(t_dat *win);
-void	animate(t_dat *win);
+int		animate(t_dat *win);
 t_coo	set_coo(int x, int y);
 void	move_player(t_dat *win, int reset);
 int		mpitw(t_dat *win, void *img_ptr, int x, int y);

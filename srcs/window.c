@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:52:19 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/11 16:18:42 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/19 13:58:44 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -24,7 +24,7 @@ t_dat	*open_win(int w, int h, char *title)
 	return (win);
 }
 
-void	close_and_exit(t_dat *win)
+int	close_and_exit(t_dat *win)
 {
 	mlx_clear_window(win->cid, win->wid);
 	free_player(win);
@@ -32,4 +32,5 @@ void	close_and_exit(t_dat *win)
 	free(win->tit);
 	free(win);
 	exit(EXIT_SUCCESS);
+	return (0);
 }

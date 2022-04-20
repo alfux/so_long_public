@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:47:54 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/16 17:42:45 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/19 17:38:32 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -20,8 +20,12 @@ static void	add_kbool(int keycode, t_dat *win)
 		i++;
 	if (keycode == MOVE_UP || keycode == MOVE_DOWN
 		|| keycode == MOVE_LEFT || keycode == MOVE_RIGHT)
-		if (i < 4 && win->hum.k[i - 1] != keycode)
+	{
+		if (!i)
 			win->hum.k[i] = keycode;
+		else if (i < 4 && win->hum.k[i - 1] != keycode)
+			win->hum.k[i] = keycode;
+	}
 	if (i < 4 && win->hum.k[i] >= 0)
 		win->hum.i = i;
 	else
@@ -46,15 +50,17 @@ static void	rem_kbool(int keycode, t_dat *win)
 	win->hum.i = i - 1;
 }
 
-void	kd_event(int keycode, t_dat *win)
+int	kd_event(int keycode, t_dat *win)
 {
-	ft_printf("\033[33mKeycode: %#x\n\033[0m", keycode);
+	ft_printf("%sKeycode: %#x\n%s", YELLOW, keycode, WHITE);
 	if (keycode == ESCAPE)
 		close_and_exit(win);
 	add_kbool(keycode, win);
+	return (0);
 }
 
-void	ku_event(int keycode, t_dat *win)
+int	ku_event(int keycode, t_dat *win)
 {
 	rem_kbool(keycode, win);
+	return (0);
 }
