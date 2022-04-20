@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 20:25:35 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/19 19:12:25 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/20 22:56:33 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -48,6 +48,7 @@ int	animate(t_dat *win)
 		move_player(win, 0);
 	else
 		move_player(win, 1);
+	draw_map(win);
 	mlx_do_sync(win->cid);
 	return (0);
 }

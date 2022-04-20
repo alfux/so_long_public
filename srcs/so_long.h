@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/20 15:09:03 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/20 22:54:39 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -53,10 +53,11 @@ struct					s_guy
 typedef struct s_guy	t_guy;
 struct					s_map
 {
-	t_img	pix[16];
+	t_img	pix[18];
 	char	**imap;
 	size_t	h;
 	size_t	w;
+	t_coo	exit;
 };
 typedef struct s_map	t_map;
 struct					s_dat
@@ -71,12 +72,13 @@ struct					s_dat
 };
 typedef struct s_dat	t_dat;
 
-t_dat	*open_win(int x, int y, char *title);
+t_dat	*open_win(char **map, char *title);
 int		close_and_exit(t_dat *win);
 int		kd_event(int keycode, t_dat *win);
 int		ku_event(int keycode, t_dat *win);
-void	load_player(t_dat *win, int x, int y);
+void	load(t_dat *win, char **map);
 void	free_player(t_dat *win);
+void	free_map(t_dat *win);
 int		animate(t_dat *win);
 t_coo	set_coo(int x, int y);
 void	move_player(t_dat *win, int reset);
@@ -84,5 +86,7 @@ int		mpitw(t_dat *win, void *img_ptr, int x, int y);
 void	*mxfti(void *mlx_ptr, char *filename, int *width, int *height);
 char	*mgda(void *img_ptr, int *bits_per_pixel, int *size_line, int *endian);
 int		get_map(char *mapname, char ***map);
-//int	mlx_hook(t_win_list *win, int x_event, int x_mask, int (*f)(), void *p);
+char	around(char **map, size_t i, size_t j);
+void	process_map(t_dat *win, char **map);
+void	draw_map(t_dat *win);
 #endif

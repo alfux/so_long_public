@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:05:34 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/20 16:29:35 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/20 21:00:19 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -27,11 +27,13 @@ static void	get_mapix(t_dat *win)
 	pl[8].iid = mxfti(win->cid, "pix/WallLUR.xpm", &pl[8].w, &pl[8].h);
 	pl[9].iid = mxfti(win->cid, "pix/WallDLU.xpm", &pl[9].w, &pl[9].h);
 	pl[10].iid = mxfti(win->cid, "pix/WallLDR.xpm", &pl[10].w, &pl[10].h);
-	pl[11].iid = mxfti(win->cid, "pix/WallULD.xpm", &pl[11].w, &pl[11].h);
+	pl[11].iid = mxfti(win->cid, "pix/WallURD.xpm", &pl[11].w, &pl[11].h);
 	pl[12].iid = mxfti(win->cid, "pix/Pillar.xpm", &pl[12].w, &pl[12].h);
 	pl[13].iid = mxfti(win->cid, "pix/Floor.xpm", &pl[13].w, &pl[13].h);
 	pl[14].iid = mxfti(win->cid, "pix/BloodyFloor.xpm", &pl[14].w, &pl[14].h);
 	pl[15].iid = mxfti(win->cid, "pix/WallC.xpm", &pl[15].w, &pl[15].h);
+	pl[16].iid = mxfti(win->cid, "pix/WallUD.xpm", &pl[16].w, &pl[16].h);
+	pl[17].iid = mxfti(win->cid, "pix/WallLR.xpm", &pl[17].w, &pl[17].h);
 }
 
 static void	get_sprites(t_dat *win)
@@ -57,22 +59,29 @@ static void	get_sprites(t_dat *win)
 	pl[15].iid = mxfti(win->cid, "pix/Bmove2.xpm", &pl[15].w, &pl[15].h);
 }
 
-void	load_player(t_dat *win, int x, int y)
+void	load(t_dat *win, char **map)
 {
 	int		i;
 
 	get_sprites(win);
+	get_mapix(win);
 	i = -1;
 	while (++i < 16)
 	{
 		win->hum.spr[i].fpx = mgda(win->hum.spr[i].iid, &win->hum.spr[i].bpp,
 				&win->hum.spr[i].sil, &win->hum.spr[i].end);
 	}
-	win->hum.pos = set_coo(x, y);
 	i = 0;
 	while (i < 4)
 		win->hum.k[i++] = -1;
 	win->hum.i = -1;
+	i = -1;
+	while (++i < 18)
+	{
+		win->map.pix[i].fpx = mgda(win->map.pix[i].iid, &win->map.pix[i].bpp,
+				&win->map.pix[i].sil, &win->map.pix[i].end);
+	}
+	process_map(win, map);
 }
 
 void	free_player(t_dat *win)

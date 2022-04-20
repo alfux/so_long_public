@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:57:42 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/20 14:54:53 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/20 23:13:17 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -36,6 +36,23 @@ static int	get_err_map(int err, char ***map)
 	}
 }
 
+static void	show_imap(t_dat *win)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (i < win->map.h)
+	{
+		while (j < win->map.w)
+			ft_printf("%2i ", *(*(win->map.imap + i) + j++));
+		ft_printf("\n");
+		i++;
+		j = 0;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_dat	*win;
@@ -45,9 +62,11 @@ int	main(int argc, char **argv)
 		return (1);
 	if (get_err_map(get_map(*(argv + 1), &map), &map))
 		return (2);
-	win = open_win(598, 650, "so_long");
-	load_player(win, 20, 20);
-	mpitw(win, win->hum.spr[0].iid, 20, 20);
+	win = open_win(map, "so_long");
+	show_imap(win);
+	draw_map(win);
+	*((int *)win->hum.spr[0].fpx) = 0x00FFFFFF;
+	mpitw(win, win->hum.spr[0].iid, win->hum.pos.x, win->hum.pos.y);
 	mlx_loop_hook(win->cid, &animate, win);
 	mlx_hook(win->wid, KeyPress, KeyPressMask, &kd_event, win);
 	mlx_hook(win->wid, KeyRelease, KeyReleaseMask, &ku_event, win);
