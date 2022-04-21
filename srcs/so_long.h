@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/20 22:54:39 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/21 02:10:06 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -20,7 +20,7 @@
 # define WHITE "\033[0m"
 # define GREEN "\033[32m"
 # define YELLOW "\033[33m"
-# include "../libft/libft.h"
+# include "../lib_ft/libft.h"
 # include <fcntl.h>
 # include <mlx.h>
 # include <X11/X.h>

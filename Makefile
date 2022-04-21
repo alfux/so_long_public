@@ -6,7 +6,7 @@
 #    By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/05 14:43:45 by afuchs            #+#    #+#              #
-#    Updated: 2022/04/20 22:34:24 by afuchs           ###   ########.fr        #
+#    Updated: 2022/04/21 02:10:29 by afuchs           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 SRCS	=	main.c					\
@@ -84,7 +84,7 @@ SHEADER = so_long.h
 
 OPATH	= obj/
 
-LPATH	= libft/
+LPATH	= lib_ft/
 
 SPATH	= srcs/
 
