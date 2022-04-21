@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 20:25:35 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/20 22:56:33 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/21 00:51:11 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -44,11 +44,11 @@ int	animate(t_dat *win)
 	while (curr - prev < CLOCKS_PER_SEC / 60)
 		curr = clock();
 	prev = curr;
+	//draw_map(win);
 	if (win->hum.i != -1)
 		move_player(win, 0);
 	else
 		move_player(win, 1);
-	draw_map(win);
 	mlx_do_sync(win->cid);
 	return (0);
 }
@@ -75,6 +75,5 @@ void	move_player(t_dat *win, int reset)
 		next = 0;
 		sync = 0;
 	}
-	mlx_clear_window(win->cid, win->wid);
 	mpitw(win, win->hum.spr[step + next].iid, win->hum.pos.x, win->hum.pos.y);
 }
