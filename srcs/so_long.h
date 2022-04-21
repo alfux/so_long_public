@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/21 02:12:37 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/21 18:19:38 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -16,6 +16,7 @@
 # define MOVE_LEFT 0x71
 # define MOVE_RIGHT 0x64
 # define ESCAPE 0xff1b
+# define SPEED 60
 # define RED "\033[31m"
 # define WHITE "\033[0m"
 # define GREEN "\033[32m"
@@ -89,4 +90,7 @@ int		get_map(char *mapname, char ***map);
 char	around(char **map, size_t i, size_t j);
 void	process_map(t_dat *win, char **map);
 void	draw_map(t_dat *win);
+void	redraw_zone(t_dat *win);
+int		isobstacle(t_dat *win, size_t i, size_t j);
+void	redraw_wall(t_dat *win);
 #endif

@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 19:07:38 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/21 01:52:18 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/21 14:11:06 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -19,7 +19,7 @@ static char	triple_wall(char a[4])
 		return (11);
 	else if (a[0] != '1' && a[1] == '1' && a[2] != '1' && a[3] != '1')
 		return (10);
-	else// (a[0] == '1' && a[1] != '1' && a[2] != '1' && a[3] != '1')
+	else
 		return (9);
 }
 
@@ -35,7 +35,7 @@ static char	double_wall(char a[4])
 		return (7);
 	else if (a[0] == '1' && a[1] != '1' && a[2] == '1' && a[3] != '1')
 		return (16);
-	else// (a[0] == '1' && a[1] == '1' && a[2] != '1' && a[3] != '1')
+	else
 		return (4);
 }
 
@@ -47,13 +47,13 @@ static char	simple_wall(char a[4])
 		return (2);
 	else if (a[0] == '1' && a[1] == '1' && a[2] != '1' && a[3] == '1')
 		return (3);
-	else//  (a[0] == '1' && a[1] == '1' && a[2] == '1' && a[3] != '1')
+	else
 		return (0);
 }
 
 char	around(char **map, size_t i, size_t j)
 {
-    char	a[4];
+	char	a[4];
 	char	k;
 	char	no_one;
 

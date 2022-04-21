@@ -6,31 +6,64 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 20:25:35 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/21 00:51:11 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/21 19:35:14 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
+int	isobstacle(t_dat *win, size_t i, size_t j)
+{
+	if (*(*(win->map.imap + i) + j) != 13 && *(*(win->map.imap + i) + j) != 14)
+		return (1);
+	return (0);
+}
+static int	can_i_move(t_dat *win, int x, int y)
+{
+	size_t	i;
+	size_t	j;
+
+	i = (win->hum.pos.y + y + 20) / 32;
+	j = (win->hum.pos.x + x + 8) / 32;
+	if (isobstacle(win, i, j))
+		return (0);
+	i = (win->hum.pos.y + y + 20) / 32;
+	j = (win->hum.pos.x + x + 24) / 32;
+	if (isobstacle(win, i, j))
+		return (0);
+	i = (win->hum.pos.y + y + 24) / 32;
+	j = (win->hum.pos.x + x + 24) / 32;
+	if (isobstacle(win, i, j))
+		return (0);
+	i = (win->hum.pos.y + y + 24) / 32;
+	j = (win->hum.pos.x + x + 8) / 32;
+	if (isobstacle(win, i, j))
+		return (0);
+	return (x + y);
+}
 
 static int	process_kinputs(t_dat *win)
 {
 	if (win->hum.i == -1)
 		return (0);
 	if (win->hum.k[win->hum.i] == MOVE_UP)
-		win->hum.pos.y -= 1;
-	else if (win->hum.k[win->hum.i] == MOVE_DOWN)
-		win->hum.pos.y += 1;
-	else if (win->hum.k[win->hum.i] == MOVE_LEFT)
-		win->hum.pos.x -= 1;
-	else if (win->hum.k[win->hum.i] == MOVE_RIGHT)
-		win->hum.pos.x += 1;
-	if (win->hum.k[win->hum.i] == MOVE_UP)
+	{
+		win->hum.pos.y += can_i_move(win, 0, -1);
 		return (6);
+	}
 	else if (win->hum.k[win->hum.i] == MOVE_DOWN)
+	{
+		win->hum.pos.y += can_i_move(win, 0, 1);
 		return (0);
+	}
 	else if (win->hum.k[win->hum.i] == MOVE_LEFT)
+	{
+		win->hum.pos.x += can_i_move(win, -1, 0);
 		return (4);
+	}
 	else
+	{
+		win->hum.pos.x += can_i_move(win, 1, 0);
 		return (2);
+	}
 }
 
 int	animate(t_dat *win)
@@ -38,42 +71,43 @@ int	animate(t_dat *win)
 	static clock_t	prev;
 	clock_t			curr;
 
-	//ft_printf("posx: %i | posy: %i\n", win->hum.pos.x, win->hum.pos.y);
-	//ft_printf("k0: %x | k1: %x | k2: %x | k3: %x | ki: %i\n", win->hum.k[0], win->hum.k[1], win->hum.k[2], win->hum.k[3], win->hum.i);
 	curr = clock();
-	while (curr - prev < CLOCKS_PER_SEC / 60)
+	while (curr - prev < CLOCKS_PER_SEC / SPEED)
 		curr = clock();
 	prev = curr;
-	//draw_map(win);
+	redraw_zone(win);
 	if (win->hum.i != -1)
 		move_player(win, 0);
 	else
 		move_player(win, 1);
+	redraw_wall(win);
 	mlx_do_sync(win->cid);
 	return (0);
 }
 
 void	move_player(t_dat *win, int reset)
 {
-	static int	next;
-	static int	sync;
+	static int	next[2];
+	static int	sync[2];
 	static int	step;
+	t_coo		start;
 
+	start = win->hum.pos;
 	if (!reset)
 		step = process_kinputs(win);
-	if (!next && !sync)
-		next = 8;
-	else if (next == 8 && sync == 8)
-		next = 1;
-	else if (next == 1 && sync == 16)
-		next = 9;
-	else if (sync == 24)
-		next = 0;
-	sync = (sync + 1) % 32;
-	if (reset)
-	{
-		next = 0;
-		sync = 0;
-	}
-	mpitw(win, win->hum.spr[step + next].iid, win->hum.pos.x, win->hum.pos.y);
+	if (start.x == win->hum.pos.x && start.y == win->hum.pos.y)
+		reset = 1;
+	next[!reset] = 0;
+	sync[!reset] = 0;
+	if (!next[reset] && !sync[reset])
+		next[reset] = 8 * !reset;
+	else if (next[reset] == 8 * !reset && sync[reset] == 8)
+		next[reset] = 1;
+	else if (next[reset] == 1 && sync[reset] == 16)
+		next[reset] = 1 + 8 * !reset;
+	else if (sync[reset] == 24)
+		next[reset] = 0;
+	sync[reset] = (sync[reset] + 1) % 32;
+	mpitw(win, win->hum.spr[step + next[reset]].iid,
+		win->hum.pos.x, win->hum.pos.y);
 }
