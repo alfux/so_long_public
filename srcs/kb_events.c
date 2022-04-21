@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:47:54 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/19 17:38:32 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/22 00:56:34 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -52,7 +52,7 @@ static void	rem_kbool(int keycode, t_dat *win)
 
 int	kd_event(int keycode, t_dat *win)
 {
-	ft_printf("%sKeycode: %#x\n%s", YELLOW, keycode, WHITE);
+	//ft_printf("%sKeycode: %#x\n%s", YELLOW, keycode, WHITE);
 	if (keycode == ESCAPE)
 		close_and_exit(win);
 	add_kbool(keycode, win);
