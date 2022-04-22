@@ -6,16 +6,21 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 20:25:35 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/21 19:35:14 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/22 19:50:14 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
+
 int	isobstacle(t_dat *win, size_t i, size_t j)
 {
-	if (*(*(win->map.imap + i) + j) != 13 && *(*(win->map.imap + i) + j) != 14)
+	if (*(*(win->map.imap + i) + j) != 13
+		&& *(*(win->map.imap + i) + j) != 14
+		&& *(*(win->map.imap + i) + j) != 18
+		&& *(*(win->map.imap + i) + j) != 22)
 		return (1);
 	return (0);
 }
+
 static int	can_i_move(t_dat *win, int x, int y)
 {
 	size_t	i;

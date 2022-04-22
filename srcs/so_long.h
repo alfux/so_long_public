@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/21 18:19:38 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/22 19:17:58 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -46,7 +46,7 @@ struct					s_img
 typedef struct s_img	t_img;
 struct					s_guy
 {
-	t_img	spr[16];
+	t_img	spr[19];
 	t_coo	pos;
 	int		k[4];
 	int		i;
@@ -54,7 +54,7 @@ struct					s_guy
 typedef struct s_guy	t_guy;
 struct					s_map
 {
-	t_img	pix[18];
+	t_img	pix[28];
 	char	**imap;
 	size_t	h;
 	size_t	w;

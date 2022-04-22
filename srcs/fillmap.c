@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:47:33 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/20 21:10:09 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/22 19:43:13 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -80,12 +80,9 @@ static void	fill_line(t_dat *win, char **map, size_t i)
 			win->hum.pos = set_coo(j * 32, i * 32);
 		}
 		else if (*(*(map + i) + j) == 'E')
-		{
-			*(*(win->map.imap + i) + j) = 13;
-			win->map.exit = set_coo(j * 32, i * 32);
-		}
+			*(*(win->map.imap + i) + j) = 22;
 		else if (*(*(map + i) + j) == 'C')
-			*(*(win->map.imap + i) + j) = 14;
+			*(*(win->map.imap + i) + j) = 18;
 		else
 			*(*(win->map.imap + i) + j) = 13;
 	}

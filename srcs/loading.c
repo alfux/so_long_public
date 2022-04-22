@@ -6,10 +6,27 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:05:34 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/20 21:00:19 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/22 19:40:51 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
+
+static void	get_corpse_and_pod(t_dat *win)
+{
+	t_img	*pl;
+
+	pl = win->map.pix;
+	pl[18].iid = mxfti(win->cid, "pix/Corpse1.xpm", &pl[18].w, &pl[18].h);
+	pl[19].iid = mxfti(win->cid, "pix/Corpse2.xpm", &pl[19].w, &pl[19].h);
+	pl[20].iid = mxfti(win->cid, "pix/Corpse3.xpm", &pl[20].w, &pl[20].h);
+	pl[21].iid = mxfti(win->cid, "pix/Corpse4.xpm", &pl[21].w, &pl[21].h);
+	pl[22].iid = mxfti(win->cid, "pix/Pod1.xpm", &pl[22].w, &pl[22].h);
+	pl[23].iid = mxfti(win->cid, "pix/Pod2.xpm", &pl[23].w, &pl[23].h);
+	pl[24].iid = mxfti(win->cid, "pix/Pod3.xpm", &pl[24].w, &pl[24].h);
+	pl[25].iid = mxfti(win->cid, "pix/Pod4.xpm", &pl[25].w, &pl[25].h);
+	pl[26].iid = mxfti(win->cid, "pix/Pod5.xpm", &pl[26].w, &pl[26].h);
+	pl[27].iid = mxfti(win->cid, "pix/Pod6.xpm", &pl[27].w, &pl[27].h);
+}
 
 static void	get_mapix(t_dat *win)
 {
@@ -34,6 +51,7 @@ static void	get_mapix(t_dat *win)
 	pl[15].iid = mxfti(win->cid, "pix/WallC.xpm", &pl[15].w, &pl[15].h);
 	pl[16].iid = mxfti(win->cid, "pix/WallUD.xpm", &pl[16].w, &pl[16].h);
 	pl[17].iid = mxfti(win->cid, "pix/WallLR.xpm", &pl[17].w, &pl[17].h);
+	get_corpse_and_pod(win);
 }
 
 static void	get_sprites(t_dat *win)
@@ -57,6 +75,9 @@ static void	get_sprites(t_dat *win)
 	pl[13].iid = mxfti(win->cid, "pix/Lmove2.xpm", &pl[13].w, &pl[13].h);
 	pl[14].iid = mxfti(win->cid, "pix/Bmove1.xpm", &pl[14].w, &pl[14].h);
 	pl[15].iid = mxfti(win->cid, "pix/Bmove2.xpm", &pl[15].w, &pl[15].h);
+	pl[16].iid = mxfti(win->cid, "pix/Clean1.xpm", &pl[16].w, &pl[16].h);
+	pl[17].iid = mxfti(win->cid, "pix/Clean2.xpm", &pl[17].w, &pl[17].h);
+	pl[18].iid = mxfti(win->cid, "pix/Clean3.xpm", &pl[18].w, &pl[18].h);
 }
 
 void	load(t_dat *win, char **map)
@@ -82,23 +103,4 @@ void	load(t_dat *win, char **map)
 				&win->map.pix[i].sil, &win->map.pix[i].end);
 	}
 	process_map(win, map);
-}
-
-void	free_player(t_dat *win)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < 16)
-		mlx_destroy_image(win->cid, win->hum.spr[i++].iid);
-}
-
-void	free_map(t_dat *win)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < win->map.h)
-		free(*(win->map.imap + i++));
-	free(win->map.imap);
 }
