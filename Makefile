@@ -6,12 +6,13 @@
 #    By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/05 14:43:45 by afuchs            #+#    #+#              #
-#    Updated: 2022/04/21 02:12:25 by afuchs           ###   ########.fr        #
+#    Updated: 2022/04/23 18:29:40 by afuchs           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 SRCS	=	main.c					\
 			loading.c				\
 			animate.c				\
+			animate2.c				\
 			kb_events.c				\
 			window.c				\
 			map.c					\

@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/22 19:17:58 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/23 18:26:18 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -93,4 +93,5 @@ void	draw_map(t_dat *win);
 void	redraw_zone(t_dat *win);
 int		isobstacle(t_dat *win, size_t i, size_t j);
 void	redraw_wall(t_dat *win);
+void	clean_corpse(t_dat *win);
 #endif
