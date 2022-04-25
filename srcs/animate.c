@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 20:25:35 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/23 18:36:24 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/25 15:41:24 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -75,16 +75,23 @@ int	animate(t_dat *win)
 {
 	static clock_t	prev;
 	clock_t			curr;
+	char			*sqr;
 
+	sqr = *(win->map.imap + 1 + (win->hum.pos.y / 32))
+		+ ((win->hum.pos.x + 16) / 32);
 	curr = clock();
 	while (curr - prev < CLOCKS_PER_SEC / SPEED)
 		curr = clock();
 	prev = curr;
 	redraw_zone(win);
+	if (!win->bodyc)
+		open_exit(win);
 	if (win->hum.i != -1)
 		move_player(win, 0);
-	else if (*(*(win->map.imap + 1 + (win->hum.pos.y / 32)) + ((win->hum.pos.x + 16) / 32)) == 18)
-		clean_corpse(win);
+	else if (!win->bodyc && *sqr == 22)
+		game_over(win, 1);
+	else if (*sqr == 18 || *sqr == 19 || *sqr == 20 || *sqr == 21)
+		clean_corpse(win, sqr);
 	else
 		move_player(win, 1);
 	redraw_wall(win);

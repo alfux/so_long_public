@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:52:19 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/22 19:44:45 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/25 15:38:38 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -39,6 +39,8 @@ t_dat	*open_win(char **map, char *title)
 
 	win = ft_calloc(1, sizeof (t_dat));
 	win->cid = mlx_init();
+	win->bodyc = 0;
+	win->expos = set_coo(0, 0);
 	load(win, map);
 	win->w = win->map.w * 32;
 	win->h = win->map.h * 32;
@@ -57,4 +59,10 @@ int	close_and_exit(t_dat *win)
 	free(win);
 	exit(EXIT_SUCCESS);
 	return (0);
+}
+
+void	game_over(t_dat *win, char wl)
+{
+	(void)wl;
+	close_and_exit(win);
 }

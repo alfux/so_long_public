@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:47:33 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/22 19:43:13 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/25 15:23:29 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -64,11 +64,8 @@ static void	fill_lfirstlast(t_dat *win, char **map, size_t i)
 		*(*(win->map.imap + i) + win->map.w - 1) = 3;
 }
 
-static void	fill_line(t_dat *win, char **map, size_t i)
+static void	fill_line(t_dat *win, char **map, size_t i, size_t j)
 {
-	size_t	j;
-
-	j = 0;
 	fill_lfirstlast(win, map, i);
 	while (++j < win->map.w - 1)
 	{
@@ -80,9 +77,15 @@ static void	fill_line(t_dat *win, char **map, size_t i)
 			win->hum.pos = set_coo(j * 32, i * 32);
 		}
 		else if (*(*(map + i) + j) == 'E')
+		{
 			*(*(win->map.imap + i) + j) = 22;
+			win->expos = set_coo(j * 32, i * 32);
+		}
 		else if (*(*(map + i) + j) == 'C')
+		{
+			win->bodyc++;
 			*(*(win->map.imap + i) + j) = 18;
+		}
 		else
 			*(*(win->map.imap + i) + j) = 13;
 	}
@@ -96,7 +99,7 @@ void	process_map(t_dat *win, char **map)
 	get_smap(win, map);
 	fill_firstlast(win, map);
 	while (++i < win->map.h - 1)
-		fill_line(win, map, i);
+		fill_line(win, map, i, 0);
 	i = 0;
 	while (*(map + i))
 		free(*(map + i++));
