@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/25 15:35:27 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/30 20:36:54 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -63,15 +63,16 @@ struct					s_map
 typedef struct s_map	t_map;
 struct					s_dat
 {
-	void	*cid;
-	void	*wid;
-	int		w;
-	int		h;
-	char	*tit;
-	t_guy	hum;
-	t_map	map;
-	size_t	bodyc;
-	t_coo	expos;
+	void			*cid;
+	void			*wid;
+	int				w;
+	int				h;
+	char			*tit;
+	t_guy			hum;
+	t_map			map;
+	size_t			bodyc;
+	t_coo			expos;
+	unsigned int	moves;
 };
 typedef struct s_dat	t_dat;
 
@@ -95,7 +96,8 @@ void	draw_map(t_dat *win);
 void	redraw_zone(t_dat *win);
 int		isobstacle(t_dat *win, size_t i, size_t j);
 void	redraw_wall(t_dat *win);
-int		clean_corpse(t_dat *win, char *sqr);
+void	clean_corpse(t_dat *win, char *sqr, char abort);
 void	open_exit(t_dat *win);
 void	game_over(t_dat *win, char wl);
+void	show_moves(t_dat *win);
 #endif

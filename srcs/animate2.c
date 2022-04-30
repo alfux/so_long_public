@@ -6,38 +6,36 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 20:25:12 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/25 15:13:31 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/30 20:49:21 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
 
-int	clean_corpse(t_dat *win, char *sqr)
+void	clean_corpse(t_dat *win, char *sqr, char abort)
 {
-	static int	next;
-	static int	sync;
-	static int	finish;
+	static int	nsf[3];
 
-	if (finish >= 3)
+	if (nsf[2] >= 3 || abort)
 	{
-		finish = 0;
-		sync = 0;
-		next = 0;
-		win->bodyc--;
-		*sqr = 13;
-		move_player(win, 1);
-		return (1);
+		ft_bzero(nsf, 3 * sizeof(int));
+		win->bodyc -= !abort;
+		if (sqr)
+		{
+			*sqr = 13;
+			move_player(win, 1);
+		}
+		return ;
 	}
-	if (!sync && finish++ < 3)
-		next = 16;
-	else if (sync == 8)
-		next = 17;
-	else if (sync == 16)
-		next = 18;
-	else if (sync == 24)
-		next = 17;
-	sync = (sync + 1) % 32;
-	mpitw(win, win->hum.spr[next].iid, win->hum.pos.x, win->hum.pos.y);
-	return (0);
+	if (!nsf[1] && nsf[2]++ < 3)
+		nsf[0] = 16;
+	else if (nsf[1] == 8)
+		nsf[0] = 17;
+	else if (nsf[1] == 16)
+		nsf[0] = 18;
+	else if (nsf[1] == 24)
+		nsf[0] = 17;
+	nsf[1] = (nsf[1] + 1) % 32;
+	mpitw(win, win->hum.spr[nsf[0]].iid, win->hum.pos.x, win->hum.pos.y);
 }
 
 void	open_exit(t_dat *win)
@@ -66,4 +64,14 @@ void	open_exit(t_dat *win)
 	}
 	sync = (sync + 1) % 32;
 	mpitw(win, win->map.pix[next].iid, win->expos.x, win->expos.y);
+}
+
+void	show_moves(t_dat *win)
+{
+	char	*moves;
+
+	moves = ft_itoa(win->moves / 32);
+	mlx_string_put(win->cid, win->wid, 5, 15, 0xFFFFFFFF, "MOVES: ");
+	mlx_string_put(win->cid, win->wid, 69, 15, 0xFFFFFFFF, moves);
+	free(moves);
 }

@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 20:25:35 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/25 15:41:24 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/30 20:42:33 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -42,6 +42,7 @@ static int	can_i_move(t_dat *win, int x, int y)
 	j = (win->hum.pos.x + x + 8) / 32;
 	if (isobstacle(win, i, j))
 		return (0);
+	win->moves++;
 	return (x + y);
 }
 
@@ -91,10 +92,11 @@ int	animate(t_dat *win)
 	else if (!win->bodyc && *sqr == 22)
 		game_over(win, 1);
 	else if (*sqr == 18 || *sqr == 19 || *sqr == 20 || *sqr == 21)
-		clean_corpse(win, sqr);
+		clean_corpse(win, sqr, 0);
 	else
 		move_player(win, 1);
 	redraw_wall(win);
+	show_moves(win);
 	mlx_do_sync(win->cid);
 	return (0);
 }
@@ -108,7 +110,10 @@ void	move_player(t_dat *win, int reset)
 
 	start = win->hum.pos;
 	if (!reset)
+	{
+		clean_corpse(win, (void *)0, 1);
 		step = process_kinputs(win);
+	}
 	if (start.x == win->hum.pos.x && start.y == win->hum.pos.y)
 		reset = 1;
 	next[!reset] = 0;

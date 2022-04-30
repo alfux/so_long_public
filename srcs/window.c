@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:52:19 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/25 15:38:38 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/30 19:55:55 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -46,6 +46,7 @@ t_dat	*open_win(char **map, char *title)
 	win->h = win->map.h * 32;
 	win->wid = mlx_new_window(win->cid, win->w, win->h, title);
 	win->tit = ft_strdup(title);
+	win->moves = 0;
 	return (win);
 }
 

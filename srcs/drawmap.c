@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 21:29:54 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/21 18:00:01 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/04/30 20:19:40 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -31,6 +31,9 @@ void	redraw_zone(t_dat *win)
 	int	i;
 	int	j;
 
+	mpitw(win, win->map.pix[(unsigned int)*(*win->map.imap + 0)].iid, 0, 0);
+	mpitw(win, win->map.pix[(unsigned int)*(*win->map.imap + 1)].iid, 32, 0);
+	mpitw(win, win->map.pix[(unsigned int)*(*win->map.imap + 2)].iid, 64, 0);
 	i = win->hum.pos.y / 32;
 	j = win->hum.pos.x / 32;
 	mpitw(win, win->map.pix[(unsigned int)*(*(win->map.imap + i) + j)].iid,
