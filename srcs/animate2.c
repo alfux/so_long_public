@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 20:25:12 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 20:49:21 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/02 18:58:53 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -22,7 +22,7 @@ void	clean_corpse(t_dat *win, char *sqr, char abort)
 		if (sqr)
 		{
 			*sqr = 13;
-			move_player(win, 1);
+			move_player(win, win->hum.pos, 1);
 		}
 		return ;
 	}

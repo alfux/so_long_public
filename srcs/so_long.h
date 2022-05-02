@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 20:36:54 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/02 18:58:02 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -61,18 +61,26 @@ struct					s_map
 	t_coo	exit;
 };
 typedef struct s_map	t_map;
+struct					s_bad
+{
+	t_coo	pos;
+	int		dir;
+};
+typedef struct s_bad	t_bad;
 struct					s_dat
 {
-	void			*cid;
-	void			*wid;
-	int				w;
-	int				h;
-	char			*tit;
-	t_guy			hum;
-	t_map			map;
-	size_t			bodyc;
-	t_coo			expos;
-	unsigned int	moves;
+	void	*cid;
+	void	*wid;
+	int		w;
+	int		h;
+	char	*tit;
+	t_guy	hum;
+	t_map	map;
+	size_t	bodyc;
+	t_coo	expos;
+	size_t	moves;
+	size_t	nbad;
+	t_bad	*bad;
 };
 typedef struct s_dat	t_dat;
 
@@ -85,7 +93,7 @@ void	free_player(t_dat *win);
 void	free_map(t_dat *win);
 int		animate(t_dat *win);
 t_coo	set_coo(int x, int y);
-void	move_player(t_dat *win, int reset);
+void	move_player(t_dat *win, t_coo start, int reset);
 int		mpitw(t_dat *win, void *img_ptr, int x, int y);
 void	*mxfti(void *mlx_ptr, char *filename, int *width, int *height);
 char	*mgda(void *img_ptr, int *bits_per_pixel, int *size_line, int *endian);
@@ -100,4 +108,6 @@ void	clean_corpse(t_dat *win, char *sqr, char abort);
 void	open_exit(t_dat *win);
 void	game_over(t_dat *win, char wl);
 void	show_moves(t_dat *win);
+size_t	rng(size_t range);
+void	show_enemy(t_dat *win);
 #endif

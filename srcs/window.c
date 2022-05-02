@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:52:19 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 19:55:55 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/02 17:55:03 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -57,6 +57,7 @@ int	close_and_exit(t_dat *win)
 	free_map(win);
 	mlx_destroy_window(win->cid, win->wid);
 	free(win->tit);
+	free(win->bad);
 	free(win);
 	exit(EXIT_SUCCESS);
 	return (0);

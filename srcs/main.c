@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:57:42 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/21 02:01:42 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/02 19:02:07 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -53,6 +53,21 @@ static void	show_imap(t_dat *win)
 	}
 }
 
+void	testrng(size_t n)
+{
+	int		ng[12];
+	size_t	i;
+
+	ft_bzero(ng, 12 * sizeof(int));
+	i = 0;
+	while (i++ < n)
+		ng[rng(12)]++;
+	i = 0;
+	i--;
+	while (++i < 12)
+		ft_printf("number of %i: %i\n", i, ng[i]);
+}
+
 int	main(int argc, char **argv)
 {
 	t_dat	*win;
@@ -64,6 +79,7 @@ int	main(int argc, char **argv)
 		return (2);
 	win = open_win(map, "so_long");
 	show_imap(win);
+	show_enemy(win);
 	draw_map(win);
 	mpitw(win, win->hum.spr[0].iid, win->hum.pos.x, win->hum.pos.y);
 	mlx_loop_hook(win->cid, &animate, win);
