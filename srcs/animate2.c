@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 20:25:12 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/02 18:58:53 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 18:00:07 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -36,6 +36,7 @@ void	clean_corpse(t_dat *win, char *sqr, char abort)
 		nsf[0] = 17;
 	nsf[1] = (nsf[1] + 1) % 32;
 	mpitw(win, win->hum.spr[nsf[0]].iid, win->hum.pos.x, win->hum.pos.y);
+	move_enemy(win);
 }
 
 void	open_exit(t_dat *win)

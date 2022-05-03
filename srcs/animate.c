@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 20:25:35 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/02 18:56:44 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 18:05:10 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -21,28 +21,29 @@ int	isobstacle(t_dat *win, size_t i, size_t j)
 	return (0);
 }
 
-static int	can_i_move(t_dat *win, int x, int y)
+int	can_it_move(t_dat *win, t_coo pos, int x, int y)
 {
 	size_t	i;
 	size_t	j;
 
-	i = (win->hum.pos.y + y + 20) / 32;
-	j = (win->hum.pos.x + x + 8) / 32;
+	i = (pos.y + y + 20) / 32;
+	j = (pos.x + x + 8) / 32;
 	if (isobstacle(win, i, j))
 		return (0);
-	i = (win->hum.pos.y + y + 20) / 32;
-	j = (win->hum.pos.x + x + 24) / 32;
+	i = (pos.y + y + 20) / 32;
+	j = (pos.x + x + 24) / 32;
 	if (isobstacle(win, i, j))
 		return (0);
-	i = (win->hum.pos.y + y + 24) / 32;
-	j = (win->hum.pos.x + x + 24) / 32;
+	i = (pos.y + y + 24) / 32;
+	j = (pos.x + x + 24) / 32;
 	if (isobstacle(win, i, j))
 		return (0);
-	i = (win->hum.pos.y + y + 24) / 32;
-	j = (win->hum.pos.x + x + 8) / 32;
+	i = (pos.y + y + 24) / 32;
+	j = (pos.x + x + 8) / 32;
 	if (isobstacle(win, i, j))
 		return (0);
-	win->moves++;
+	if (pos.x == win->hum.pos.x && pos.y == win->hum.pos.y)
+		win->moves++;
 	return (x + y);
 }
 
@@ -52,22 +53,22 @@ static int	process_kinputs(t_dat *win)
 		return (0);
 	if (win->hum.k[win->hum.i] == MOVE_UP)
 	{
-		win->hum.pos.y += can_i_move(win, 0, -1);
+		win->hum.pos.y += can_it_move(win, win->hum.pos, 0, -1);
 		return (6);
 	}
 	else if (win->hum.k[win->hum.i] == MOVE_DOWN)
 	{
-		win->hum.pos.y += can_i_move(win, 0, 1);
+		win->hum.pos.y += can_it_move(win, win->hum.pos, 0, 1);
 		return (0);
 	}
 	else if (win->hum.k[win->hum.i] == MOVE_LEFT)
 	{
-		win->hum.pos.x += can_i_move(win, -1, 0);
+		win->hum.pos.x += can_it_move(win, win->hum.pos, -1, 0);
 		return (4);
 	}
 	else
 	{
-		win->hum.pos.x += can_i_move(win, 1, 0);
+		win->hum.pos.x += can_it_move(win, win->hum.pos, 1, 0);
 		return (2);
 	}
 }
@@ -84,7 +85,7 @@ int	animate(t_dat *win)
 	while (curr - prev < CLOCKS_PER_SEC / SPEED)
 		curr = clock();
 	prev = curr;
-	redraw_zone(win);
+	redraw_zone(win, win->hum.pos);
 	if (!win->bodyc)
 		open_exit(win);
 	if (win->hum.i != -1)
@@ -95,7 +96,7 @@ int	animate(t_dat *win)
 		clean_corpse(win, sqr, 0);
 	else
 		move_player(win, win->hum.pos, 1);
-	redraw_wall(win);
+	redraw_wall(win, win->hum.pos);
 	show_moves(win);
 	mlx_do_sync(win->cid);
 	return (0);
@@ -127,4 +128,5 @@ void	move_player(t_dat *win, t_coo start, int reset)
 	sync[reset] = (sync[reset] + 1) % 32;
 	mpitw(win, win->hum.spr[step + next[reset]].iid,
 		win->hum.pos.x, win->hum.pos.y);
+	move_enemy(win);
 }

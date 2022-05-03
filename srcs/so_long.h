@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/02 18:58:02 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 19:09:03 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -64,7 +64,14 @@ typedef struct s_map	t_map;
 struct					s_bad
 {
 	t_coo	pos;
+	t_coo	prev_pos;
 	int		dir;
+	int		tr[4];
+	int		next;
+	int		sync;
+	int		step;
+	clock_t	curr;
+	clock_t	prev;
 };
 typedef struct s_bad	t_bad;
 struct					s_dat
@@ -101,13 +108,16 @@ int		get_map(char *mapname, char ***map);
 char	around(char **map, size_t i, size_t j);
 void	process_map(t_dat *win, char **map);
 void	draw_map(t_dat *win);
-void	redraw_zone(t_dat *win);
+void	redraw_zone(t_dat *win, t_coo pos);
+int		can_it_move(t_dat *win, t_coo pos, int x, int y);
 int		isobstacle(t_dat *win, size_t i, size_t j);
-void	redraw_wall(t_dat *win);
+void	redraw_wall(t_dat *win, t_coo pos);
 void	clean_corpse(t_dat *win, char *sqr, char abort);
 void	open_exit(t_dat *win);
 void	game_over(t_dat *win, char wl);
 void	show_moves(t_dat *win);
 size_t	rng(size_t range);
 void	show_enemy(t_dat *win);
+void	move_enemy(t_dat *win);
+t_bad	*another_dir(t_bad *bad);
 #endif

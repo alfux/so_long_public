@@ -6,18 +6,18 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 21:29:54 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/30 20:19:40 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/03 18:04:24 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
 
-void	redraw_wall(t_dat *win)
+void	redraw_wall(t_dat *win, t_coo pos)
 {
 	size_t	i;
 	size_t	j;
 
-	i = win->hum.pos.y / 32;
-	j = win->hum.pos.x / 32;
+	i = pos.y / 32;
+	j = pos.x / 32;
 	if (isobstacle(win, ++i, j))
 		mpitw(win, win->map.pix[(unsigned int)*(*(win->map.imap + i) + j)].iid,
 			j * 32, i * 32);
@@ -26,7 +26,7 @@ void	redraw_wall(t_dat *win)
 			j * 32, i * 32);
 }
 
-void	redraw_zone(t_dat *win)
+void	redraw_zone(t_dat *win, t_coo pos)
 {
 	int	i;
 	int	j;
@@ -34,8 +34,8 @@ void	redraw_zone(t_dat *win)
 	mpitw(win, win->map.pix[(unsigned int)*(*win->map.imap + 0)].iid, 0, 0);
 	mpitw(win, win->map.pix[(unsigned int)*(*win->map.imap + 1)].iid, 32, 0);
 	mpitw(win, win->map.pix[(unsigned int)*(*win->map.imap + 2)].iid, 64, 0);
-	i = win->hum.pos.y / 32;
-	j = win->hum.pos.x / 32;
+	i = pos.y / 32;
+	j = pos.x / 32;
 	mpitw(win, win->map.pix[(unsigned int)*(*(win->map.imap + i) + j)].iid,
 		j * 32, i * 32);
 	i++;
