@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:57:42 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/02 19:02:07 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/04 15:59:53 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -79,9 +79,8 @@ int	main(int argc, char **argv)
 		return (2);
 	win = open_win(map, "so_long");
 	show_imap(win);
-	show_enemy(win);
+	putenemy(win);
 	draw_map(win);
-	mpitw(win, win->hum.spr[0].iid, win->hum.pos.x, win->hum.pos.y);
 	mlx_loop_hook(win->cid, &animate, win);
 	mlx_hook(win->wid, KeyPress, KeyPressMask, &kd_event, win);
 	mlx_hook(win->wid, KeyRelease, KeyReleaseMask, &ku_event, win);

@@ -6,10 +6,20 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:05:34 by afuchs            #+#    #+#             */
-/*   Updated: 2022/04/22 19:40:51 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/04 13:55:06 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
+
+size_t	rng(size_t range)
+{
+	static size_t	rng;
+
+	if (range <= 1)
+		return (0);
+	rng = rng + ((size_t)clock() % 2) * (size_t)clock() + (size_t)(&range);
+	return (rng % range);
+}
 
 static void	get_corpse_and_pod(t_dat *win)
 {

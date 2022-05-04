@@ -6,20 +6,10 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:48:26 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/03 19:47:36 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/04 18:12:22 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
-
-size_t	rng(size_t range)
-{
-	static size_t	rng;
-
-	if (range <= 1)
-		return (0);
-	rng = rng + ((size_t)clock() % 2) * (size_t)clock() + (size_t)(&range);
-	return (rng % range);
-}
 
 static void	nenemy(t_dat *win, size_t *freespaces)
 {
@@ -59,6 +49,7 @@ static void	do_i_put(t_dat *win, size_t *case_number, size_t *fs, t_coo pos)
 				(*(win->bad + i)).next = 0;
 				(*(win->bad + i)).sync = 0;
 				(*(win->bad + i)).step = 0;
+				ft_printf("[%i]: PosX: %i PosY: %i\n", i, pos.x, pos.y);
 			}
 			else
 				*(case_number + i) += 1;
@@ -68,7 +59,7 @@ static void	do_i_put(t_dat *win, size_t *case_number, size_t *fs, t_coo pos)
 	*fs += 1;
 }
 
-static void	putenemy(t_dat *win)
+void	putenemy(t_dat *win)
 {
 	size_t	freespace;
 	size_t	*case_number;
@@ -77,7 +68,7 @@ static void	putenemy(t_dat *win)
 
 	nenemy(win, &freespace);
 	if (!freespace || !win->nbad)
-		return ;
+		return (drwtab(win));
 	case_number = ft_calloc(win->nbad, sizeof (size_t));
 	win->bad = ft_calloc(win->nbad, sizeof (t_bad));
 	i = 0;
@@ -94,21 +85,7 @@ static void	putenemy(t_dat *win)
 		j = -1;
 	}
 	free(case_number);
-}
-
-//Supprimable
-void	show_enemy(t_dat *win)
-{
-	size_t	i;
-
-	i = 0;
-	putenemy(win);
-	while (i < win->nbad)
-	{
-		ft_printf("Ennemy %i: x%i y%i\n",
-			i, win->bad[i].pos.x, win->bad[i].pos.y);
-		i++;
-	}
+	drwtab(win);
 }
 
 static void	enemy_step(t_dat *win, t_bad *bad)
@@ -118,7 +95,6 @@ static void	enemy_step(t_dat *win, t_bad *bad)
 	{
 		bad->prev = bad->curr;
 		bad->step = rng(4) * 2;
-		ft_printf("bad->step: %i\n", bad->step);
 	}
 	if (bad->prev)
 	{
@@ -142,28 +118,26 @@ static void	enemy_step(t_dat *win, t_bad *bad)
 void	move_enemy(t_dat *win)
 {
 	size_t	i;
+	char	start;
 
-	i = -1;
-	while (++i < win->nbad)
-	{
-		redraw_zone(win, (*(win->bad + i)).pos);
-		redraw_wall(win, (*(win->bad + i)).pos);
-	}
+	if (win->bad->prev)
+		start = 8;
+	else
+		start = 0;
 	i = -1;
 	while (++i < win->nbad)
 	{
 		enemy_step(win, win->bad + i);
 		if (!(*(win->bad + i)).next && !(*(win->bad + i)).sync)
-			(*(win->bad + i)).next = 8;
-		else if ((*(win->bad + i)). next == 8 && (*(win->bad + i)).sync == 8)
+			(*(win->bad + i)).next = 0 + start;
+		else if ((*(win->bad + i)).next == start && (*(win->bad + i)).sync == 8)
 			(*(win->bad + i)).next = 1;
-		else if ((*(win->bad + i)). next == 1 && (*(win->bad + i)).sync == 16)
-			(*(win->bad + i)).next = 9;
-		else if ((*(win->bad + i)). next == 9 && (*(win->bad + i)).sync == 24)
+		else if ((*(win->bad + i)).next == 1 && (*(win->bad + i)).sync == 16)
+			(*(win->bad + i)).next = 1 + start;
+		else if ((*(win->bad + i)).next == 1 + start && (*(win->bad + i)).sync
+			== 24)
 			(*(win->bad + i)).next = 0;
 		(*(win->bad + i)).sync = ((*(win->bad + i)).sync + 1) % 32;
-		mpitw(win,
-			win->hum.spr[(*(win->bad + i)).step + (*(win->bad + i)).next].iid,
-			(*(win->bad + i)).pos.x, (*(win->bad + i)).pos.y);
+		(*(win->bad + i)).aff = (*(win->bad + i)).step + (*(win->bad + i)).next;
 	}
 }

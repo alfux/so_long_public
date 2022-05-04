@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 20:25:35 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/03 18:05:10 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/04 18:11:58 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -85,9 +85,6 @@ int	animate(t_dat *win)
 	while (curr - prev < CLOCKS_PER_SEC / SPEED)
 		curr = clock();
 	prev = curr;
-	redraw_zone(win, win->hum.pos);
-	if (!win->bodyc)
-		open_exit(win);
 	if (win->hum.i != -1)
 		move_player(win, win->hum.pos, 0);
 	else if (!win->bodyc && *sqr == 22)
@@ -96,8 +93,9 @@ int	animate(t_dat *win)
 		clean_corpse(win, sqr, 0);
 	else
 		move_player(win, win->hum.pos, 1);
-	redraw_wall(win, win->hum.pos);
-	show_moves(win);
+	if (win->nbad)
+		move_enemy(win);
+	drawchars(win);
 	mlx_do_sync(win->cid);
 	return (0);
 }
@@ -126,7 +124,5 @@ void	move_player(t_dat *win, t_coo start, int reset)
 	else if (sync[reset] == 24)
 		next[reset] = 0;
 	sync[reset] = (sync[reset] + 1) % 32;
-	mpitw(win, win->hum.spr[step + next[reset]].iid,
-		win->hum.pos.x, win->hum.pos.y);
-	move_enemy(win);
+	win->hum.aff = step + next[reset];
 }
