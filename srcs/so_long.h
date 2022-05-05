@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/05 16:33:22 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/06 01:35:03 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -135,4 +135,5 @@ void	drwtab(t_dat *win);
 void	drawchars(t_dat *win);
 int		loser(t_dat *win);
 void	putscr(t_img scr, t_img img, int x, int y);
+void	rand_exit(t_dat *win, t_coo add, char end);
 #endif

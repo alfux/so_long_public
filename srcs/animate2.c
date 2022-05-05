@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 20:25:12 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/05 17:42:53 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/06 01:46:54 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -64,6 +64,31 @@ void	open_exit(t_dat *win)
 	}
 	sync = (sync + 1) % 32;
 	putscr(win->scr, win->map.pix[next], win->expos.x, win->expos.y);
+}
+
+//A CONTINUER
+void	rand_exit(t_dat *win, t_coo add, char end)
+{
+	size_t			i;
+	static int		nex;
+	static t_coo	*exits;
+	t_coo			*tmp;
+
+	if (!end)
+	{
+		nex++;
+		tmp = ft_calloc(nex, sizeof (t_coo));
+		i = -1;
+		while (++i < nex - 1)
+			*(tmp + i) = *(exits + i);
+		*(tmp + nex - 1) = add;
+		free(exits);
+		exits = tmp;
+	}
+	else
+	{
+		win->expos = *(exits + rng(nex))
+	}
 }
 
 int	show_moves(t_dat *win)
