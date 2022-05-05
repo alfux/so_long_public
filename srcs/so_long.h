@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/04 15:50:35 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/05 15:16:38 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -97,6 +97,8 @@ struct					s_dat
 	size_t	nbad;
 	t_bad	*bad;
 	t_drw	*drw;
+	char	wl;
+	t_img	scr;
 };
 typedef struct s_dat	t_dat;
 
@@ -123,7 +125,7 @@ int		isobstacle(t_dat *win, size_t i, size_t j);
 void	redraw_wall(t_dat *win, t_coo pos);
 void	clean_corpse(t_dat *win, char *sqr, char abort);
 void	open_exit(t_dat *win);
-void	game_over(t_dat *win, char wl);
+int		game_over(t_dat *win);
 void	show_moves(t_dat *win);
 size_t	rng(size_t range);
 void	putenemy(t_dat *win);
@@ -131,4 +133,5 @@ void	move_enemy(t_dat *win);
 t_bad	*another_dir(t_bad *bad);
 void	drwtab(t_dat *win);
 void	drawchars(t_dat *win);
+int		loser(t_dat *win);
 #endif

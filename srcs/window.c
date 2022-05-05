@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:52:19 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/04 15:52:59 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/05 15:27:54 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -47,6 +47,10 @@ t_dat	*open_win(char **map, char *title)
 	win->wid = mlx_new_window(win->cid, win->w, win->h, title);
 	win->tit = ft_strdup(title);
 	win->moves = 0;
+	win->wl = 1;
+	win->scr.iid = mlx_new_image(win->cid, win->w, win->h);
+	win->scr.fpx = mgda(win->scr.iid, &win->scr.bpp, &win->scr.sil,
+		&win->scr.end);
 	return (win);
 }
 
@@ -55,6 +59,7 @@ int	close_and_exit(t_dat *win)
 	mlx_clear_window(win->cid, win->wid);
 	free_player(win);
 	free_map(win);
+	mlx_destroy_image(win->cid, win->scr.iid);
 	mlx_destroy_window(win->cid, win->wid);
 	free(win->tit);
 	free(win->bad);
@@ -64,8 +69,30 @@ int	close_and_exit(t_dat *win)
 	return (0);
 }
 
-void	game_over(t_dat *win, char wl)
+int	game_over(t_dat *win)
 {
-	(void)wl;
-	close_and_exit(win);
+	char		*moves;
+	static int	twice;
+
+	if (twice < 2)
+	{
+		twice++;
+		mlx_clear_window(win->cid, win->wid);
+		moves = ft_itoa(win->moves / 32);
+		if (win->wl)
+		{
+			mlx_string_put(win->cid, win->wid, win->w / 2 - 32, win->h / 2,
+				0xFFFFFFFF, "YOU WIN");
+			mlx_string_put(win->cid, win->wid, win->w / 2 - 32,
+				(win->h / 2) + 32, 0xFFFFFFFF, "Moves:");
+			mlx_string_put(win->cid, win->wid, (win->w / 2) + 32,
+				(win->h / 2) + 32, 0xFFFFFFFF, moves);
+		}
+		else
+			mlx_string_put(win->cid, win->wid, win->w / 2 - 32, win->h / 2,
+				0xFFFF0000, "YOU DIED");
+		free(moves);
+		mlx_loop_hook(win->cid, &game_over, win);
+	}
+	return (0);
 }

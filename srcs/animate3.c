@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 18:40:11 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/04 18:16:31 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/05 15:08:50 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -93,4 +93,24 @@ void	drawchars(t_dat *win)
 		redraw_wall(win, *(*(win->drw + i)).pos);
 	}
 	show_moves(win);
+}
+
+int	loser(t_dat *win)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < win->nbad)
+	{
+		if (((win->hum.pos.x - win->bad[i].pos.x) *
+			(win->hum.pos.x - win->bad[i].pos.x)) + 
+			((win->hum.pos.y - win->bad[i].pos.y) * 
+			(win->hum.pos.y - win->bad[i].pos.y)) <= 256)
+		{
+			win->wl = 0;
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }
