@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 18:40:11 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/05 15:08:50 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/05 18:00:32 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -33,6 +33,7 @@ t_bad	*another_dir(t_bad *bad)
 		j++;
 	}
 	bad->step = *(next_try + rng(4 - tried));
+	free(next_try);
 	return (bad);
 }
 
@@ -88,11 +89,10 @@ void	drawchars(t_dat *win)
 	i = -1;
 	while (++i < win->nbad + 1)
 	{
-		mpitw(win, win->hum.spr[*(*(win->drw + i)).aff].iid,
+		putscr(win->scr, win->hum.spr[*(*(win->drw + i)).aff],
 			(*(*(win->drw + i)).pos).x, (*(*(win->drw + i)).pos).y);
 		redraw_wall(win, *(*(win->drw + i)).pos);
 	}
-	show_moves(win);
 }
 
 int	loser(t_dat *win)
@@ -102,10 +102,10 @@ int	loser(t_dat *win)
 	i = 0;
 	while (i < win->nbad)
 	{
-		if (((win->hum.pos.x - win->bad[i].pos.x) *
-			(win->hum.pos.x - win->bad[i].pos.x)) + 
-			((win->hum.pos.y - win->bad[i].pos.y) * 
-			(win->hum.pos.y - win->bad[i].pos.y)) <= 256)
+		if (((win->hum.pos.x - win->bad[i].pos.x)
+				* (win->hum.pos.x - win->bad[i].pos.x))
+			+ ((win->hum.pos.y - win->bad[i].pos.y)
+				* (win->hum.pos.y - win->bad[i].pos.y)) <= 256)
 		{
 			win->wl = 0;
 			return (1);

@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:48:26 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/04 18:12:22 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/05 17:24:15 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -49,7 +49,6 @@ static void	do_i_put(t_dat *win, size_t *case_number, size_t *fs, t_coo pos)
 				(*(win->bad + i)).next = 0;
 				(*(win->bad + i)).sync = 0;
 				(*(win->bad + i)).step = 0;
-				ft_printf("[%i]: PosX: %i PosY: %i\n", i, pos.x, pos.y);
 			}
 			else
 				*(case_number + i) += 1;

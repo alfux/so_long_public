@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 20:25:12 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/04 15:57:37 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/05 17:42:53 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -63,10 +63,10 @@ void	open_exit(t_dat *win)
 		op = 1;
 	}
 	sync = (sync + 1) % 32;
-	mpitw(win, win->map.pix[next].iid, win->expos.x, win->expos.y);
+	putscr(win->scr, win->map.pix[next], win->expos.x, win->expos.y);
 }
 
-void	show_moves(t_dat *win)
+int	show_moves(t_dat *win)
 {
 	char	*moves;
 
@@ -74,4 +74,5 @@ void	show_moves(t_dat *win)
 	mlx_string_put(win->cid, win->wid, 5, 15, 0xFFFFFFFF, "MOVES: ");
 	mlx_string_put(win->cid, win->wid, 69, 15, 0xFFFFFFFF, moves);
 	free(moves);
+	return (0);
 }

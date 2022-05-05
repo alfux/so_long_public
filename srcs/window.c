@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:52:19 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/05 15:27:54 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/05 18:00:58 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -50,7 +50,7 @@ t_dat	*open_win(char **map, char *title)
 	win->wl = 1;
 	win->scr.iid = mlx_new_image(win->cid, win->w, win->h);
 	win->scr.fpx = mgda(win->scr.iid, &win->scr.bpp, &win->scr.sil,
-		&win->scr.end);
+			&win->scr.end);
 	return (win);
 }
 

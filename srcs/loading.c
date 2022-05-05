@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:05:34 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/04 13:55:06 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/05 17:21:21 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -97,7 +97,7 @@ void	load(t_dat *win, char **map)
 	get_sprites(win);
 	get_mapix(win);
 	i = -1;
-	while (++i < 16)
+	while (++i < 19)
 	{
 		win->hum.spr[i].fpx = mgda(win->hum.spr[i].iid, &win->hum.spr[i].bpp,
 				&win->hum.spr[i].sil, &win->hum.spr[i].end);
@@ -107,7 +107,7 @@ void	load(t_dat *win, char **map)
 		win->hum.k[i++] = -1;
 	win->hum.i = -1;
 	i = -1;
-	while (++i < 18)
+	while (++i < 28)
 	{
 		win->map.pix[i].fpx = mgda(win->map.pix[i].iid, &win->map.pix[i].bpp,
 				&win->map.pix[i].sil, &win->map.pix[i].end);

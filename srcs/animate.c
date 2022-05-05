@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 20:25:35 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/05 15:02:11 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/05 16:33:00 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -98,8 +98,8 @@ int	animate(t_dat *win)
 	drawchars(win);
 	if (loser(win))
 		game_over(win);
-	mlx_do_sync(win->cid);
-	return (0);
+	mpitw(win, win->scr.iid, 0, 0);
+	return (show_moves(win));
 }
 
 void	move_player(t_dat *win, t_coo start, int reset)
