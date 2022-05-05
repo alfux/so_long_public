@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:57:42 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/05 17:52:25 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/05 19:01:08 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -24,6 +24,7 @@ static int	get_err_map(int err, char ***map)
 	}
 	else
 	{
+		ft_printf("%sError%s\n", RED, WHITE);
 		if (err == 1)
 			ft_printf("%sUnknown file type.%s\n", RED, WHITE);
 		else if (err == 2)
