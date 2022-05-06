@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:57:42 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/05 19:01:08 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/06 20:34:48 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -43,7 +43,10 @@ int	main(int argc, char **argv)
 	char	**map;
 
 	if (argc != 2)
+	{
+		ft_printf("%sError\nIncorrect parameters%s\n", RED, WHITE);
 		return (1);
+	}
 	if (get_err_map(get_map(*(argv + 1), &map), &map))
 		return (2);
 	win = open_win(map, "so_long");

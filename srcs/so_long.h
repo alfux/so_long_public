@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/06 17:15:03 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/06 21:07:56 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -74,6 +74,7 @@ struct					s_bad
 	int		aff;
 	clock_t	curr;
 	clock_t	prev;
+	clock_t	tbc;
 };
 typedef struct s_bad	t_bad;
 struct					s_drw

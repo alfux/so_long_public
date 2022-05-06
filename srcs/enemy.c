@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:48:26 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/06 15:06:02 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/06 21:09:43 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -90,8 +90,9 @@ void	putenemy(t_dat *win)
 static void	enemy_step(t_dat *win, t_bad *bad)
 {
 	bad->curr = clock();
-	if (bad->curr - bad->prev > CLOCKS_PER_SEC * (1 + (clock_t)rng(3)))
+	if (bad->curr - bad->prev > CLOCKS_PER_SEC * (1 + bad->tbc))
 	{
+		bad->tbc = (clock_t)rng(5);
 		bad->prev = bad->curr;
 		bad->step = rng(4) * 2;
 	}
