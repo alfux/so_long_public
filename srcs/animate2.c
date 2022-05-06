@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 20:25:12 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/06 01:46:54 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/06 15:59:52 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -18,7 +18,8 @@ void	clean_corpse(t_dat *win, char *sqr, char abort)
 	if (nsf[2] >= 3 || abort)
 	{
 		ft_bzero(nsf, 3 * sizeof(int));
-		win->bodyc -= !abort;
+		if (!abort)
+			remove_body(win, sqr);
 		if (sqr)
 		{
 			*sqr = 13;
@@ -66,11 +67,10 @@ void	open_exit(t_dat *win)
 	putscr(win->scr, win->map.pix[next], win->expos.x, win->expos.y);
 }
 
-//A CONTINUER
 void	rand_exit(t_dat *win, t_coo add, char end)
 {
 	size_t			i;
-	static int		nex;
+	static size_t	nex;
 	static t_coo	*exits;
 	t_coo			*tmp;
 
@@ -87,7 +87,33 @@ void	rand_exit(t_dat *win, t_coo add, char end)
 	}
 	else
 	{
-		win->expos = *(exits + rng(nex))
+		win->expos = *(exits + rng(nex));
+		free(exits);
+	}
+}
+
+void	rand_hum(t_dat *win, t_coo add, char end)
+{
+	size_t			i;
+	static size_t	nhu;
+	static t_coo	*hum;
+	t_coo			*tmp;
+
+	if (!end)
+	{
+		nhu++;
+		tmp = ft_calloc(nhu, sizeof (t_coo));
+		i = -1;
+		while (++i < nhu - 1)
+			*(tmp + i) = *(hum + i);
+		*(tmp + nhu - 1) = add;
+		free(hum);
+		hum = tmp;
+	}
+	else
+	{
+		win->hum.pos = *(hum + rng(nhu));
+		free(hum);
 	}
 }
 

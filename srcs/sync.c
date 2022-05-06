@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:31:49 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/05 17:55:47 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/06 15:04:21 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -37,4 +37,22 @@ void	putscr(t_img scr, t_img img, int x, int y)
 		}
 		j = -1;
 	}
+}
+
+size_t	sqrdd(t_coo p, t_coo q)
+{
+	return ((p.x - q.x) * (p.x - q.x) + (p.y - q.y) * (p.y - q.y));
+}
+
+t_coo	syncp(t_coo humpos)
+{
+	humpos.y += 16;
+	return (humpos);
+}
+
+char	isfree(char	c)
+{
+	if (c == 13 || c == 18 || c == 22)
+		return (1);
+	return (0);
 }

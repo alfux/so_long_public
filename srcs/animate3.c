@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 18:40:11 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/05 18:00:32 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/06 17:22:06 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -76,7 +76,7 @@ static void	reorder_chars(t_dat *win, t_drw *drw)
 	i = 0;
 }
 
-void	drawchars(t_dat *win)
+void	drawscr(t_dat *win)
 {
 	size_t	i;
 
@@ -86,6 +86,7 @@ void	drawchars(t_dat *win)
 		redraw_zone(win, *(*(win->drw + i)).pos);
 	if (!win->bodyc)
 		open_exit(win);
+	blood_drop(win);
 	i = -1;
 	while (++i < win->nbad + 1)
 	{
@@ -102,10 +103,7 @@ int	loser(t_dat *win)
 	i = 0;
 	while (i < win->nbad)
 	{
-		if (((win->hum.pos.x - win->bad[i].pos.x)
-				* (win->hum.pos.x - win->bad[i].pos.x))
-			+ ((win->hum.pos.y - win->bad[i].pos.y)
-				* (win->hum.pos.y - win->bad[i].pos.y)) <= 256)
+		if (sqrdd(win->hum.pos, win->bad[i].pos) <= 256)
 		{
 			win->wl = 0;
 			return (1);

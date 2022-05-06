@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:52:19 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/05 18:00:58 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/06 16:05:50 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -64,6 +64,7 @@ int	close_and_exit(t_dat *win)
 	free(win->tit);
 	free(win->bad);
 	free(win->drw);
+	free(win->bodies);
 	free(win);
 	exit(EXIT_SUCCESS);
 	return (0);

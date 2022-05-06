@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:48:26 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/05 17:24:15 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/06 15:06:02 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -23,7 +23,7 @@ static void	nenemy(t_dat *win, size_t *freespaces)
 	while (i < win->map.h)
 	{
 		while (j < win->map.w)
-			if (*(*(win->map.imap + i) + j++) == 13)
+			if (isfree(*(*(win->map.imap + i) + j++)))
 				win->nbad++;
 		j = 0;
 		i++;
@@ -79,7 +79,7 @@ void	putenemy(t_dat *win)
 	while (++i < win->map.h)
 	{
 		while (++j < win->map.w)
-			if (*(*(win->map.imap + i) + j) == 13)
+			if (isfree(*(*(win->map.imap + i) + j)))
 				do_i_put(win, case_number, &freespace, set_coo(j, i));
 		j = -1;
 	}

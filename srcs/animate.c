@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 20:25:35 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/05 16:33:00 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/06 17:14:06 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -87,15 +87,15 @@ int	animate(t_dat *win)
 	prev = curr;
 	if (win->hum.i != -1)
 		move_player(win, win->hum.pos, 0);
-	else if (!win->bodyc && *sqr == 22)
+	else if (!win->bodyc && sqrdd(syncp(win->hum.pos), win->expos) < 64)
 		game_over(win);
-	else if (*sqr == 18 || *sqr == 19 || *sqr == 20 || *sqr == 21)
+	else if (*sqr == 18 && near_corpse(win))
 		clean_corpse(win, sqr, 0);
 	else
 		move_player(win, win->hum.pos, 1);
 	if (win->nbad)
 		move_enemy(win);
-	drawchars(win);
+	drawscr(win);
 	if (loser(win))
 		game_over(win);
 	mpitw(win, win->scr.iid, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/06 01:35:03 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/06 17:15:03 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
@@ -92,6 +92,7 @@ struct					s_dat
 	t_guy	hum;
 	t_map	map;
 	size_t	bodyc;
+	t_coo	*bodies;
 	t_coo	expos;
 	size_t	moves;
 	size_t	nbad;
@@ -132,8 +133,16 @@ void	putenemy(t_dat *win);
 void	move_enemy(t_dat *win);
 t_bad	*another_dir(t_bad *bad);
 void	drwtab(t_dat *win);
-void	drawchars(t_dat *win);
+void	drawscr(t_dat *win);
 int		loser(t_dat *win);
 void	putscr(t_img scr, t_img img, int x, int y);
 void	rand_exit(t_dat *win, t_coo add, char end);
+void	rand_hum(t_dat *win, t_coo add, char end);
+size_t	sqrdd(t_coo p, t_coo q);
+t_coo	syncp(t_coo humpos);
+char	isfree(char c);
+void	bodytab(t_dat *win, t_coo add);
+void	remove_body(t_dat *win, char *sqr);
+void	blood_drop(t_dat *win);
+char	near_corpse(t_dat *win);
 #endif

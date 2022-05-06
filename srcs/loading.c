@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:05:34 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/05 17:21:21 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/06 17:30:08 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -17,7 +17,8 @@ size_t	rng(size_t range)
 
 	if (range <= 1)
 		return (0);
-	rng = rng + ((size_t)clock() % 2) * (size_t)clock() + (size_t)(&range);
+	rng = (rng + (((size_t)clock() * rng) % 2) * (size_t)clock()
+	+ (size_t)(&range)) / ((clock() % 3) + 1);
 	return (rng % range);
 }
 
