@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:31:49 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/06 15:04:21 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/06 20:29:34 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -50,7 +50,7 @@ t_coo	syncp(t_coo humpos)
 	return (humpos);
 }
 
-char	isfree(char	c)
+char	isfree(char c)
 {
 	if (c == 13 || c == 18 || c == 22)
 		return (1);

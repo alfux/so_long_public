@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 15:13:45 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/06 17:50:19 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/06 20:31:35 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -39,9 +39,9 @@ void	remove_body(t_dat *win, char *sqr)
 	while (++i < win->bodyc + 1)
 	{
 		if (*(win->map.imap
-			+ (win->bodies[i].y / 32))
+				+ (win->bodies[i].y / 32))
 			+ (win->bodies[i].x / 32) != sqr)
-			*(tmp + i - j) = *(win->bodies + i);
+				*(tmp + i - j) = *(win->bodies + i);
 		else
 			j++;
 	}
@@ -51,11 +51,11 @@ void	remove_body(t_dat *win, char *sqr)
 
 void	blood_drop(t_dat *win)
 {
-	static char 	sync;
+	static char		sync;
 	static size_t	which;
 	static size_t	bchange;
 
-	if((sync || rng(16) == 0) && win->bodyc)
+	if ((sync || rng(16) == 0) && win->bodyc)
 	{
 		sync = (sync + 1) % 32;
 		if (sync == 1)
@@ -65,7 +65,7 @@ void	blood_drop(t_dat *win)
 		}
 		if (bchange != win->bodyc)
 		{
-			if(which)
+			if (which)
 				which--;
 			sync = 0;
 		}
