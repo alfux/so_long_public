@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 20:25:35 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/06 17:14:06 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/07 04:18:49 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -119,12 +119,12 @@ void	move_player(t_dat *win, t_coo start, int reset)
 	sync[!reset] = 0;
 	if (!next[reset] && !sync[reset])
 		next[reset] = 8 * !reset;
-	else if (next[reset] == 8 * !reset && sync[reset] == 8)
+	else if (next[reset] == 8 * !reset && sync[reset] == 6)
 		next[reset] = 1;
-	else if (next[reset] == 1 && sync[reset] == 16)
+	else if (next[reset] == 1 && sync[reset] == 12)
 		next[reset] = 1 + 8 * !reset;
-	else if (sync[reset] == 24)
+	else if (sync[reset] == 18)
 		next[reset] = 0;
-	sync[reset] = (sync[reset] + 1) % 32;
+	sync[reset] = (sync[reset] + 1) % 24;
 	win->hum.aff = step + next[reset];
 }

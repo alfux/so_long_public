@@ -6,7 +6,7 @@
 /*   By: afuchs <alexis.t.fuchs@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:48:26 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/06 21:09:43 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/07 04:19:38 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -130,14 +130,14 @@ void	move_enemy(t_dat *win)
 		enemy_step(win, win->bad + i);
 		if (!(*(win->bad + i)).next && !(*(win->bad + i)).sync)
 			(*(win->bad + i)).next = 0 + start;
-		else if ((*(win->bad + i)).next == start && (*(win->bad + i)).sync == 8)
+		else if ((*(win->bad + i)).next == start && (*(win->bad + i)).sync == 6)
 			(*(win->bad + i)).next = 1;
-		else if ((*(win->bad + i)).next == 1 && (*(win->bad + i)).sync == 16)
+		else if ((*(win->bad + i)).next == 1 && (*(win->bad + i)).sync == 12)
 			(*(win->bad + i)).next = 1 + start;
 		else if ((*(win->bad + i)).next == 1 + start && (*(win->bad + i)).sync
-			== 24)
+			== 18)
 			(*(win->bad + i)).next = 0;
-		(*(win->bad + i)).sync = ((*(win->bad + i)).sync + 1) % 32;
+		(*(win->bad + i)).sync = ((*(win->bad + i)).sync + 1) % 24;
 		(*(win->bad + i)).aff = (*(win->bad + i)).step + (*(win->bad + i)).next;
 	}
 }
