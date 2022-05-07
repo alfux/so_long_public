@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:57:42 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/07 03:23:28 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/07 03:26:55 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -32,7 +32,7 @@ static int	get_err_map(int err, char ***map)
 		else if (err == 2)
 			ft_putstr_fd("Couldn't open file.\n", 2);
 		else if (err == 3)
-			ft_putstr_fd("File is not a proper map.%s\n", 2);
+			ft_putstr_fd("File is not a proper map.\n", 2);
 		else if (err == 4)
 			ft_putstr_fd("Couldn't close file descriptor.\n", 2);
 		ft_putstr_fd(WHITE, 2);
