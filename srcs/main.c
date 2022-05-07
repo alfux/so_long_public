@@ -6,10 +6,11 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:57:42 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/06 20:34:48 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/07 03:23:28 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
+#include <stdio.h>
 
 static int	get_err_map(int err, char ***map)
 {
@@ -24,15 +25,17 @@ static int	get_err_map(int err, char ***map)
 	}
 	else
 	{
-		ft_printf("%sError%s\n", RED, WHITE);
+		ft_putstr_fd(RED, 2);
+		ft_putstr_fd("Error\n", 2);
 		if (err == 1)
-			ft_printf("%sUnknown file type.%s\n", RED, WHITE);
+			ft_putstr_fd("Unknown file type.\n", 2);
 		else if (err == 2)
-			ft_printf("%sCouldn't open file.%s\n", RED, WHITE);
+			ft_putstr_fd("Couldn't open file.\n", 2);
 		else if (err == 3)
-			ft_printf("%sFile is not a proper map.%s\n", RED, WHITE);
+			ft_putstr_fd("File is not a proper map.%s\n", 2);
 		else if (err == 4)
-			ft_printf("%sCouldn't close file descriptor.%s\n", RED, WHITE);
+			ft_putstr_fd("Couldn't close file descriptor.\n", 2);
+		ft_putstr_fd(WHITE, 2);
 		return (1);
 	}
 }
@@ -44,7 +47,9 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_printf("%sError\nIncorrect parameters%s\n", RED, WHITE);
+		ft_putstr_fd(RED, 2);
+		ft_putstr_fd("Error\nIncorrect parameters\n", 2);
+		ft_putstr_fd(WHITE, 2);
 		return (1);
 	}
 	if (get_err_map(get_map(*(argv + 1), &map), &map))
