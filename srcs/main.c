@@ -6,11 +6,10 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:57:42 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/07 03:26:55 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/08 16:29:50 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
-#include <stdio.h>
 
 static int	get_err_map(int err, char ***map)
 {
@@ -58,9 +57,9 @@ int	main(int argc, char **argv)
 	putenemy(win);
 	draw_map(win);
 	mlx_loop_hook(win->cid, &animate, win);
-	mlx_hook(win->wid, KeyPress, KeyPressMask, &kd_event, win);
-	mlx_hook(win->wid, KeyRelease, KeyReleaseMask, &ku_event, win);
-	mlx_hook(win->wid, DestroyNotify, 0L, &close_and_exit, win);
+	mlx_hook(win->wid, 2, 0, &kd_event, win);
+	mlx_hook(win->wid, 3, 0, &ku_event, win);
+	mlx_hook(win->wid, 17, 0, &close_and_exit, win);
 	mlx_loop(win->cid);
 	return (0);
 }

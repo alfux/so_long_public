@@ -6,17 +6,16 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 11:24:29 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/06 21:07:56 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/08 16:37:03 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# define MOVE_UP 0x7a
-# define MOVE_DOWN 0x73
-# define MOVE_LEFT 0x71
-# define MOVE_RIGHT 0x64
-# define ESCAPE 0xff1b
-# define SPEED 60
+# define MOVE_UP 0xd
+# define MOVE_DOWN 0x1
+# define MOVE_LEFT 0x0
+# define MOVE_RIGHT 0x2
+# define ESCAPE 0x35
 # define RED "\033[31m"
 # define WHITE "\033[0m"
 # define GREEN "\033[32m"
@@ -24,7 +23,6 @@
 # include "../libft/libft.h"
 # include <fcntl.h>
 # include <mlx.h>
-# include <X11/X.h>
 # include <time.h>
 
 struct					s_coo

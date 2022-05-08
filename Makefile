@@ -6,7 +6,7 @@
 #    By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/05 14:43:45 by afuchs            #+#    #+#              #
-#    Updated: 2022/05/06 16:00:43 by afuchs           ###   ########.fr        #
+#    Updated: 2022/05/08 16:05:55 by afuchs           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 SRCS	=	main.c					\
@@ -97,8 +97,6 @@ OBJ		= $(SRCS:%.c=$(OPATH)%.o)
 
 OPT		= -Wall -Werror -Wextra -g
 
-MLX		= -lbsd -lmlx -lXext -lX11
-
 MATH	= -lm
 
 NAME	= so_long
@@ -106,7 +104,7 @@ NAME	= so_long
 all				:	$(NAME)
 
 $(NAME)			:	$(OPATH) $(OBJ)
-					@gcc $(OPT) $(MATH) $(OBJ) $(MLX) -o $(NAME)
+					@gcc $(OPT) $(MATH) $(OBJ) -lmlx -o $(NAME)
 					@echo "\033[32mCompilation complete.\033[0m"
 
 $(OPATH)%.o		:	$(SPATH)%.c $(SPATH)$(SHEADER)

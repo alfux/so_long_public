@@ -6,7 +6,7 @@
 /*   By: afuchs <afuchs@student.42mulhouse.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 20:25:35 by afuchs            #+#    #+#             */
-/*   Updated: 2022/05/07 04:18:49 by afuchs           ###   ########.fr       */
+/*   Updated: 2022/05/08 16:33:34 by afuchs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -75,16 +75,10 @@ static int	process_kinputs(t_dat *win)
 
 int	animate(t_dat *win)
 {
-	static clock_t	prev;
-	clock_t			curr;
 	char			*sqr;
 
 	sqr = *(win->map.imap + 1 + (win->hum.pos.y / 32))
 		+ ((win->hum.pos.x + 16) / 32);
-	curr = clock();
-	while (curr - prev < CLOCKS_PER_SEC / SPEED)
-		curr = clock();
-	prev = curr;
 	if (win->hum.i != -1)
 		move_player(win, win->hum.pos, 0);
 	else if (!win->bodyc && sqrdd(syncp(win->hum.pos), win->expos) < 64)
@@ -99,7 +93,9 @@ int	animate(t_dat *win)
 	if (loser(win))
 		game_over(win);
 	mpitw(win, win->scr.iid, 0, 0);
-	return (show_moves(win));
+	show_moves(win);
+	mlx_sync(2, win->wid);
+	return (0);
 }
 
 void	move_player(t_dat *win, t_coo start, int reset)
